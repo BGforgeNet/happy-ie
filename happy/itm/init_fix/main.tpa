@@ -1,0 +1,3 @@
+INCLUDE ~%comp_dir%/trim.tpa~
+INCLUDE ~%comp_dir%/bg2fixpack.tpa~
+INCLUDE ~%comp_dir%/1pp.tpa~

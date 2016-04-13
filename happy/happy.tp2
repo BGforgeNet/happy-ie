@@ -1,0 +1,61 @@
+BACKUP ~happy/backup~
+AUTHOR ~burner1024 @ github~
+VERSION ~v0~
+
+
+BEGIN ~Areas: misc~
+OUTER_SPRINT comp_dir ~%MOD_FOLDER%/are~
+INCLUDE ~%comp_dir%/main.tpa~
+
+
+BEGIN ~Creatures: structure~
+INCLUDE ~%MOD_FOLDER%/cre/init_fix.tpa~
+
+BEGIN ~Creatures: remove spurious references to the item table~
+INCLUDE ~%MOD_FOLDER%/cre/inv_unbork.tpa~
+
+BEGIN ~Creatures: replace non-existent items with existent ones where possible, otherwise remove them~
+INCLUDE ~%MOD_FOLDER%/cre/inv_clean.tpa~
+
+BEGIN ~Creatures: equip valid items and unequip invalid ones~
+INCLUDE ~%MOD_FOLDER%/cre/inv_overhaul.tpa~
+
+BEGIN ~Creatures: misc~
+OUTER_SPRINT comp_dir ~%MOD_FOLDER%/cre/gen_fix~
+INCLUDE ~%comp_dir%/main.tpa~
+
+BEGIN ~Creatures: remove duplicate effects~
+INCLUDE ~%MOD_FOLDER%/cre/remove_dup_effect.tpa~
+
+
+BEGIN ~Items: structure~
+OUTER_SPRINT comp_dir ~%MOD_FOLDER%/itm/init_fix~
+INCLUDE ~%comp_dir%/main.tpa~
+
+BEGIN ~Items: misc~
+OUTER_SPRINT comp_dir ~%MOD_FOLDER%/itm/gen_fix~
+INCLUDE ~%comp_dir%/main.tpa~
+
+BEGIN ~Items: add missing portrait icons~
+INCLUDE ~%MOD_FOLDER%/itm/assign_portrait_icon.tpa~
+
+BEGIN ~Items: add missing immunities~
+INCLUDE ~%MOD_FOLDER%/itm/add_missing_immunity.tpa~
+
+BEGIN ~Items: remove duplicate effects~
+INCLUDE ~%MOD_FOLDER%/itm/remove_dup_effect.tpa~
+
+BEGIN ~Items: misc checks~
+INCLUDE ~%MOD_FOLDER%/itm/gen_check.tpa~
+
+
+BEGIN ~Spells: structure~
+INCLUDE ~%MOD_FOLDER%/spl/structure.tpa~
+
+BEGIN ~Spells: misc~
+OUTER_SPRINT comp_dir ~%MOD_FOLDER%/spl/gen_fix~
+INCLUDE ~%comp_dir%/main.tpa~
+
+
+BEGIN ~Stores: misc~
+INCLUDE ~%MOD_FOLDER%/sto/gen_fix.tpa~

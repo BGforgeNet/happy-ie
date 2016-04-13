@@ -1,0 +1,239 @@
+COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
+  PATCH_IF (SOURCE_SIZE > 0x71) BEGIN
+    READ_BYTE  0x18 "flags"
+
+    PATCH_IF (("%flags%" BAND 0b00000100) = 0b00000100) BEGIN  // droppable
+      READ_LONG  0x6a "fx_off" ELSE 0
+      READ_SHORT 0x6e "fx_idx" ELSE 0
+      READ_SHORT 0x70 "fx_num" ELSE 0
+
+      // Effect Missing Resource Finder
+      READ_LONG  0x64 "abil_off" ELSE 0
+      READ_SHORT 0x68 "abil_num" ELSE 0
+      READ_LONG  0x6a "fx_off" ELSE 0
+      READ_SHORT 0x6e "fx_idx" ELSE 0
+      READ_SHORT 0x70 "fx_num" ELSE 0
+
+      PATCH_IF ((fx_off > 0x71) AND (abil_off > 0x71)) BEGIN
+        FOR (index = 0; index < abil_num; index = index + 1) BEGIN
+          READ_SHORT  ("%abil_off%" + 0x1e + ("%index%" * 0x38)) "abil_fx_num"
+          READ_SHORT  ("%abil_off%" + 0x20 + ("%index%" * 0x38)) "abil_fx_idx"
+          FOR (index2 = 0 ; index2 < abil_fx_num ; index2 = index2 + 1) BEGIN
+            READ_SHORT ("%fx_off%" +        (0x30 * ("%abil_fx_idx%" + "%index2%"))) "opcode"
+            READ_BYTE  ("%fx_off%" + 0x02 + (0x30 * ("%abil_fx_idx%" + "%index2%"))) "target"
+            READ_LONG  ("%fx_off%" + 0x04 + (0x30 * ("%abil_fx_idx%" + "%index2%"))) "param1"
+            READ_LONG  ("%fx_off%" + 0x08 + (0x30 * ("%abil_fx_idx%" + "%index2%"))) "param2"
+            READ_BYTE  ("%fx_off%" + 0x0c + (0x30 * ("%abil_fx_idx%" + "%index2%"))) "timing"
+            READ_ASCII ("%fx_off%" + 0x14 + (0x30 * ("%abil_fx_idx%" + "%index2%"))) "resref"
+            SET "exists" = 0
+            PATCH_IF ("%opcode%" = 67) OR
+                     ("%opcode%" = 135) OR
+                     ("%opcode%" = 151) OR
+                     ("%opcode%" = 168) BEGIN
+              PATCH_IF FILE_EXISTS_IN_GAME ~%resref%.cre~ BEGIN
+                SET "exists" = 1
+              END
+              PATCH_IF ("%exists%" = 0) BEGIN
+                PATCH_PRINT "%SOURCE_FILE% issue: Ability #%index% Effect #%index2% Opcode (%opcode%) - Non-existent Resource (%resref%.CRE)"
+              END
+            END
+            SET "exists" = 0
+            PATCH_IF ("%opcode%" = 107) BEGIN
+              PATCH_IF FILE_EXISTS_IN_GAME ~%resref%.bmp~ BEGIN
+                SET "exists" = 1
+              END
+              PATCH_IF ("%exists%" = 0) BEGIN
+                PATCH_PRINT "%SOURCE_FILE% issue: Ability #%index% Effect #%index2% Opcode (%opcode%) - Non-existent Resource (%resref%.BMP)"
+              END
+            END
+            SET "exists" = 0
+            PATCH_IF ("%opcode%" = 111) OR
+                     ("%opcode%" = 112) OR
+                     ("%opcode%" = 122) OR
+                     ("%opcode%" = 143) BEGIN
+              PATCH_IF FILE_EXISTS_IN_GAME ~%resref%.itm~ BEGIN
+                SET "exists" = 1
+              END
+              PATCH_IF ("%exists%" = 0) BEGIN
+                PATCH_PRINT "%SOURCE_FILE% issue: Ability #%index% Effect #%index2% Opcode (%opcode%) - Non-existent Resource (%resref%.ITM)"
+              END
+            END
+            SET "exists" = 0
+            PATCH_IF ("%opcode%" = 146) OR
+                     ("%opcode%" = 147) OR
+                     ("%opcode%" = 148) OR
+                     ("%opcode%" = 171) OR
+                     ("%opcode%" = 172) OR
+                     ("%opcode%" = 207) OR
+                     ("%opcode%" = 232) OR
+                     ("%opcode%" = 266) BEGIN
+              PATCH_IF FILE_EXISTS_IN_GAME ~%resref%.spl~ BEGIN
+                SET "exists" = 1
+              END
+              PATCH_IF ("%exists%" = 0) BEGIN
+                PATCH_PRINT "%SOURCE_FILE% issue: Ability #%index% Effect #%index2% Opcode (%opcode%) - Non-existent Resource (%resref%.SPL)"
+              END
+            END
+            SET "exists" = 0
+            PATCH_IF ("%opcode%" = 152) BEGIN
+              PATCH_IF FILE_EXISTS_IN_GAME ~%resref%.mve~ BEGIN
+                SET "exists" = 1
+              END
+              PATCH_IF ("%exists%" = 0) BEGIN
+                PATCH_PRINT "%SOURCE_FILE% issue: Ability #%index% Effect #%index2% Opcode (%opcode%) - Non-existent Resource (%resref%.MVE)"
+              END
+            END
+            SET "exists" = 0
+            PATCH_IF ("%opcode%" = 174) BEGIN
+              PATCH_IF FILE_EXISTS_IN_GAME ~%resref%.wav~ BEGIN
+                SET "exists" = 1
+              END
+              PATCH_IF ("%exists%" = 0) BEGIN
+                PATCH_PRINT "%SOURCE_FILE% issue: Ability #%index% Effect #%index2% Opcode (%opcode%) - Non-existent Resource (%resref%.WAV)"
+              END
+            END
+            SET "exists" = 0
+            PATCH_IF ("%opcode%" = 177) OR
+                     ("%opcode%" = 248) OR
+                     ("%opcode%" = 249) BEGIN
+              PATCH_IF FILE_EXISTS_IN_GAME ~%resref%.eff~ BEGIN
+                SET "exists" = 1
+              END
+              PATCH_IF ("%exists%" = 0) BEGIN
+                PATCH_PRINT "%SOURCE_FILE% issue: Ability #%index% Effect #%index2% Opcode (%opcode%) - Non-existent Resource (%resref%.EFF)"
+              END
+            END
+            SET "exists" = 0
+            PATCH_IF ("%opcode%" = 186) BEGIN
+              PATCH_IF FILE_EXISTS_IN_GAME ~%resref%.are~ BEGIN
+                SET "exists" = 1
+              END
+              PATCH_IF ("%exists%" = 0) BEGIN
+                PATCH_PRINT "%SOURCE_FILE% issue: Ability #%index% Effect #%index2% Opcode (%opcode%) - Non-existent Resource (%resref%.ARE)"
+              END
+            END
+          END
+        END
+        FOR (index = 0; index < fx_num; index = index + 1) BEGIN
+          READ_SHORT ("%fx_off%" +        (0x30 * "%index%")) "opcode"
+          READ_BYTE  ("%fx_off%" + 0x02 + (0x30 * "%index%")) "target"
+          READ_LONG  ("%fx_off%" + 0x04 + (0x30 * "%index%")) "param1"
+          READ_LONG  ("%fx_off%" + 0x08 + (0x30 * "%index%")) "param2"
+          READ_BYTE  ("%fx_off%" + 0x0c + (0x30 * "%index%")) "timing"
+          READ_ASCII ("%fx_off%" + 0x14 + (0x30 * "%index%")) "resref"
+          PATCH_IF (("%opcode%" = 27) OR
+                    ("%opcode%" = 28) OR
+                    ("%opcode%" = 29) OR
+                    ("%opcode%" = 30) OR
+                    ("%opcode%" = 31) OR
+                    ("%opcode%" = 33) OR
+                    ("%opcode%" = 34) OR
+                    ("%opcode%" = 35) OR
+                    ("%opcode%" = 36) OR
+                    ("%opcode%" = 37)) AND ("%param2%" = 1) AND ("%param1%" < 100) BEGIN
+            PATCH_PRINT "%SOURCE_FILE% issue: Equipped Effect #%index% Opcode (%opcode%) - Value sets to %param1%"
+          END
+          PATCH_IF (("%opcode%" = 27) OR
+                    ("%opcode%" = 28) OR
+                    ("%opcode%" = 29) OR
+                    ("%opcode%" = 30) OR
+                    ("%opcode%" = 31) OR
+                    ("%opcode%" = 33) OR
+                    ("%opcode%" = 34) OR
+                    ("%opcode%" = 35) OR
+                    ("%opcode%" = 36) OR
+                    ("%opcode%" = 37)) AND ("%param2%" = 2) AND ("%param1%" = 100) BEGIN
+            PATCH_PRINT "%SOURCE_FILE% issue: Equipped Effect #%index% Opcode (%opcode%) - Non-functional percentage change"
+          END
+          SET "exists" = 0
+          PATCH_IF ("%opcode%" = 67) OR
+                   ("%opcode%" = 135) OR
+                   ("%opcode%" = 151) OR
+                   ("%opcode%" = 168) BEGIN
+            PATCH_IF FILE_EXISTS_IN_GAME ~%resref%.cre~ BEGIN
+              SET "exists" = 1
+            END
+            PATCH_IF ("%exists%" = 0) BEGIN
+              PATCH_PRINT "%SOURCE_FILE% issue: Equipped Effect #%index% Opcode (%opcode%) - Non-existent Resource (%resref%.CRE)"
+            END
+          END
+          SET "exists" = 0
+          PATCH_IF ("%opcode%" = 107) BEGIN
+            PATCH_IF FILE_EXISTS_IN_GAME ~%resref%.bmp~ BEGIN
+              SET "exists" = 1
+            END
+            PATCH_IF ("%exists%" = 0) BEGIN
+              PATCH_PRINT "%SOURCE_FILE% issue: Equipped Effect #%index% Opcode (%opcode%) - Non-existent Resource (%resref%.BMP)"
+            END
+          END
+          SET "exists" = 0
+          PATCH_IF ("%opcode%" = 111) OR
+                   ("%opcode%" = 112) OR
+                   ("%opcode%" = 122) OR
+                   ("%opcode%" = 143) BEGIN
+            PATCH_IF FILE_EXISTS_IN_GAME ~%resref%.itm~ BEGIN
+              SET "exists" = 1
+            END
+            PATCH_IF ("%exists%" = 0) BEGIN
+              PATCH_PRINT "%SOURCE_FILE% issue: Equipped Effect #%index% Opcode (%opcode%) - Non-existent Resource (%resref%.ITM)"
+            END
+          END
+          SET "exists" = 0
+          PATCH_IF ("%opcode%" = 146) OR
+                   ("%opcode%" = 147) OR
+                   ("%opcode%" = 148) OR
+                   ("%opcode%" = 171) OR
+                   ("%opcode%" = 172) OR
+                   ("%opcode%" = 207) OR
+                   ("%opcode%" = 232) OR
+                   ("%opcode%" = 266) BEGIN
+            PATCH_IF FILE_EXISTS_IN_GAME ~%resref%.spl~ BEGIN
+              SET "exists" = 1
+            END
+            PATCH_IF ("%exists%" = 0) BEGIN
+              PATCH_PRINT "%SOURCE_FILE% issue: Equipped Effect #%index% Opcode (%opcode%) - Non-existent Resource (%resref%.SPL)"
+            END
+          END
+          SET "exists" = 0
+          PATCH_IF ("%opcode%" = 152) BEGIN
+            PATCH_IF FILE_EXISTS_IN_GAME ~%resref%.mve~ BEGIN
+              SET "exists" = 1
+            END
+            PATCH_IF ("%exists%" = 0) BEGIN
+              PATCH_PRINT "%SOURCE_FILE% issue: Equipped Effect #%index% Opcode (%opcode%) - Non-existent Resource (%resref%.MVE)"
+            END
+          END
+          SET "exists" = 0
+          PATCH_IF ("%opcode%" = 174) BEGIN
+            PATCH_IF FILE_EXISTS_IN_GAME ~%resref%.wav~ BEGIN
+              SET "exists" = 1
+            END
+            PATCH_IF ("%exists%" = 0) BEGIN
+              PATCH_PRINT "%SOURCE_FILE% issue: Equipped Effect #%index% Opcode (%opcode%) - Non-existent Resource (%resref%.WAV)"
+            END
+          END
+          SET "exists" = 0
+          PATCH_IF ("%opcode%" = 177) OR
+                   ("%opcode%" = 248) OR
+                   ("%opcode%" = 249) BEGIN
+            PATCH_IF FILE_EXISTS_IN_GAME ~%resref%.eff~ BEGIN
+              SET "exists" = 1
+            END
+            PATCH_IF ("%exists%" = 0) BEGIN
+              PATCH_PRINT "%SOURCE_FILE% issue: Equipped Effect #%index% Opcode (%opcode%) - Non-existent Resource (%resref%.EFF)"
+            END
+          END
+          SET "exists" = 0
+          PATCH_IF ("%opcode%" = 186) BEGIN
+            PATCH_IF FILE_EXISTS_IN_GAME ~%resref%.are~ BEGIN
+              SET "exists" = 1
+            END
+            PATCH_IF ("%exists%" = 0) BEGIN
+              PATCH_PRINT "%SOURCE_FILE% issue: Equipped Effect #%index% Opcode (%opcode%) - Non-existent Resource (%resref%.ARE)"
+            END
+          END
+        END
+      END
+    END
+  END
+BUT_ONLY

@@ -1,0 +1,3 @@
+ACTION_IF ENGINE_IS ~soa tob~ BEGIN
+  DISABLE_FROM_KEY xr2400.are xr2600.are
+END
