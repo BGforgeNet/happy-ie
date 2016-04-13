@@ -3,6 +3,10 @@ AUTHOR ~burner1024 @ github~
 VERSION ~v0~
 
 
+BEGIN ~General: remove invalid files~
+INCLUDE ~%MOD_FOLDER%/gen/wipe.tpa~
+
+
 BEGIN ~Areas: misc~
 OUTER_SPRINT comp_dir ~%MOD_FOLDER%/are~
 INCLUDE ~%comp_dir%/main.tpa~
