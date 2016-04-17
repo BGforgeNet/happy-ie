@@ -51,90 +51,6 @@ COPY_EXISTING ~songlist.2da~ ~override/songlist.2da~
   SET_2DA_ENTRY 2 1 2 ~G3Blank~
   SET_2DA_ENTRY 2 2 2 ~G3Blank.mus~
 
-/*
-areas with non-conventional naming convention:
-ar0021 - assigned ar0004.bcs (DNE), ar0021.bcs also DNE
-ar0315 - assigned ar0006.bcs (DNE), ar0315.bcs also DNE
-ar0316 - assigned ar0007.bcs (DNE), ar0316.bcs also DNE
-ar0518 - assigned ar0517.bcs, ar0518.bcs DNE.
-ar0519 - assigned ar0517.bcs, ar0519.bcs DNE.
-ar0520 - assigned ar0517.bcs, ar0520.bcs DNE.
-ar0521 - assigned ar0517.bcs, ar0521.bcs DNE.
-  Fine; ar0517 - ar0521 are all planar prison sinkhole traps and area script just has a DisplayString head
-ar0707 - assigned ar0003.bcs (DNE), ar0707.bcs also DNE
-ar1107 - assigned ar1102.bcs, ar1107.bcs also exists
-  ar1102 and ar1107 are the ranger cabin, pre- and post-stronghold. ar1107 jus moves globals from ar1102, so this should be fine
-ar1603 - assigned ar0001.bcs (DNE), ar1603.bcs also DNE
-ar1604 - assigned ar0609.bcs (DNE), ar1604.bcs also DNE
-  copied from ar0609 in BG
-ar1612 - assigned ar0005.bcs (DNE), ar0612.bcs also DNE
-ar2001 - assigned ar0001.bcs (DNE) but ar2001.bcs is leftover from BG
-*/
-
-// assigns area scripts to areas with none assigned
-COPY_EXISTING ~ar0061.are~ ~override~
-              ~ar0082.are~ ~override~
-              ~ar0086.are~ ~override~
-              ~ar0206.are~ ~override~
-              ~ar0302.are~ ~override~
-              ~ar0303.are~ ~override~
-              ~ar0305.are~ ~override~
-              ~ar0306.are~ ~override~
-              ~ar0310.are~ ~override~
-              ~ar0331.are~ ~override~
-              ~ar0332.are~ ~override~
-              ~ar0333.are~ ~override~
-              ~ar0335.are~ ~override~
-              ~ar0412.are~ ~override~
-              ~ar0503.are~ ~override~
-              ~ar0504.are~ ~override~
-              ~ar0509.are~ ~override~
-              ~ar0527.are~ ~override~
-              ~ar0528.are~ ~override~
-              ~ar0712.are~ ~override~
-              ~ar0713.are~ ~override~
-              ~ar0714.are~ ~override~
-              ~ar0805.are~ ~override~
-              ~ar0806.are~ ~override~
-              ~ar0807.are~ ~override~
-              ~ar0810.are~ ~override~
-              ~ar0811.are~ ~override~
-              ~ar0812.are~ ~override~
-              ~ar0813.are~ ~override~
-              ~ar1010.are~ ~override~
-              ~ar1101.are~ ~override~
-              ~ar1103.are~ ~override~
-              ~ar1201.are~ ~override~
-              ~ar1203.are~ ~override~
-              ~ar1610.are~ ~override~
-              ~ar2014.are~ ~override~
-              ~ar2015.are~ ~override~
-              ~ar2016.are~ ~override~
-              ~ar2018.are~ ~override~
-              ~ar2210.are~ ~override~
-              ~ar2810.are~ ~override~
-              ~ar2811.are~ ~override~
-              ~ar3003.are~ ~override~
-              ~ar3006.are~ ~override~
-              ~ar3010.are~ ~override~
-              ~ar3014.are~ ~override~
-              ~ar3018.are~ ~override~
-              ~ar3022.are~ ~override~
-              ~ar5501.are~ ~override~
-              ~ar5502.are~ ~override~
-              ~ar5503.are~ ~override~
-              ~ar5506.are~ ~override~
-              ~ar5508.are~ ~override~
-              ~ar6012.are~ ~override~
-              ~ar6111.are~ ~override~
-  PATCH_IF (SOURCE_SIZE > 0x11b) BEGIN // protects against invalid files
-    READ_ASCII 0x94 "script"
-    PATCH_IF (("" STRING_COMPARE_CASE "%script%" = 0) OR ("None" STRING_COMPARE_CASE "%script%" = 0)) BEGIN
-      WRITE_ASCIIE 0x94 ~%SOURCE_RES%~
-    END
-  END
-  BUT_ONLY
-
 // fix common error of incorrect map note offsets
 COPY_EXISTING ~ar0011.are~ ~override~
               ~ar0012.are~ ~override~
@@ -451,8 +367,8 @@ COPY_EXISTING ~ar0011.are~ ~override~
   PATCH_IF (("%note_num%" = 0) AND ("%note_off%" != ("%rest_off%" + 0xe4))) BEGIN
     WRITE_LONG 0xc4 ("%rest_off%" + 0xe4)
   END
-  BUT_ONLY
-  
+BUT_ONLY
+
 // if trap is undetectable, undisarmable, and has no script, remove trapped flag
 COPY_EXISTING ~ar0311.are~ ~override~
   READ_LONG  0x70 "cont_off"
