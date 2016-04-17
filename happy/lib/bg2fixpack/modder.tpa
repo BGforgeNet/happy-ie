@@ -23,7 +23,7 @@ COPY_EXISTING ~happy.ids~ ~override~
 -300 \1~
   UNLESS ~^IDS V1\.0~
 
-ACTION_IF NOT FILE_EXISTS_IN_GAME ~moraleai.ids~ THEN BEGIN
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~moraleai.ids~ BEGIN
   COPY ~bg2fixpack/ids/moraleai.ids~ ~override~
 END
 
@@ -127,13 +127,13 @@ COPY_EXISTING ~ar0061.are~ ~override~
               ~ar5508.are~ ~override~
               ~ar6012.are~ ~override~
               ~ar6111.are~ ~override~
-  PATCH_IF (SOURCE_SIZE > 0x11b) THEN BEGIN // protects against invalid files
+  PATCH_IF (SOURCE_SIZE > 0x11b) BEGIN // protects against invalid files
     READ_ASCII 0x94 "script"
     PATCH_IF (("" STRING_COMPARE_CASE "%script%" = 0) OR ("None" STRING_COMPARE_CASE "%script%" = 0)) BEGIN
-      WRITE_EVALUATED_ASCII 0x94 ~%SOURCE_RES%~
+      WRITE_ASCIIE 0x94 ~%SOURCE_RES%~
     END
   END
-  BUT_ONLY_IF_IT_CHANGES
+  BUT_ONLY
 
 // fix common error of incorrect map note offsets
 COPY_EXISTING ~ar0011.are~ ~override~
@@ -451,7 +451,7 @@ COPY_EXISTING ~ar0011.are~ ~override~
   PATCH_IF (("%note_num%" = 0) AND ("%note_off%" != ("%rest_off%" + 0xe4))) BEGIN
     WRITE_LONG 0xc4 ("%rest_off%" + 0xe4)
   END
-  BUT_ONLY_IF_IT_CHANGES
+  BUT_ONLY
   
 // if trap is undetectable, undisarmable, and has no script, remove trapped flag
 COPY_EXISTING ~ar0311.are~ ~override~
@@ -470,7 +470,7 @@ COPY_EXISTING ~ar0311.are~ ~override~
       WRITE_ASCII ("%cont_off%" + 0x48 + ("%index%" * 0xc0)) ~~ #8
     END
   END
-  BUT_ONLY_IF_IT_CHANGES
+  BUT_ONLY
   
 // removing spurious trap flags
 COPY_EXISTING ~ar0327.are~ ~override~
@@ -492,7 +492,7 @@ COPY_EXISTING ~ar0327.are~ ~override~
       WRITE_ASCII ("%cont_off%" + 0x48 + ("%index%" * 0xc0)) ~~ #8
     END
   END
-  BUT_ONLY_IF_IT_CHANGES
+  BUT_ONLY
 
 // known spells listed with incorrect level/type
 COPY_EXISTING ~aerbod01.cre~ ~override~
@@ -504,7 +504,7 @@ COPY_EXISTING ~aerbod01.cre~ ~override~
       WRITE_SHORT ("%known_off%" + 0x08 + ("%index%" * 0x0c)) 0 // correct spell level
     END
   END
-  BUT_ONLY_IF_IT_CHANGES
+  BUT_ONLY
 
 // known spells listed with incorrect level/type
 COPY_EXISTING ~alynar.cre~   ~override~
@@ -536,7 +536,7 @@ COPY_EXISTING ~alynar.cre~   ~override~
       WRITE_SHORT ("%known_off%" + 0x0a + ("%index%" * 0x0c)) 2 // correct spell type
     END
   END
-  BUT_ONLY_IF_IT_CHANGES
+  BUT_ONLY
 
 // known spells listed with incorrect level/type
 COPY_EXISTING ~amelm01.cre~  ~override~
@@ -550,7 +550,7 @@ COPY_EXISTING ~amelm01.cre~  ~override~
       WRITE_SHORT ("%known_off%" + 0x08 + ("%index%" * 0x0c)) 0 // correct spell level
     END
   END
-  BUT_ONLY_IF_IT_CHANGES
+  BUT_ONLY
 
 // known spells listed with incorrect level/type
 COPY_EXISTING ~ar18fam.cre~  ~override~
@@ -618,7 +618,7 @@ COPY_EXISTING ~ar18fam.cre~  ~override~
       WRITE_SHORT ("%known_off%" + 0x08 + ("%index%" * 0x0c)) 1 // correct spell level
     END
   END
-  BUT_ONLY_IF_IT_CHANGES
+  BUT_ONLY
 
 // known spells listed with incorrect level/type
 COPY_EXISTING ~bheye.cre~ ~override~
@@ -630,7 +630,7 @@ COPY_EXISTING ~bheye.cre~ ~override~
       WRITE_SHORT ("%known_off%" + 0x08 + ("%index%" * 0x0c)) 5 // correct spell level
     END
   END
-  BUT_ONLY_IF_IT_CHANGES
+  BUT_ONLY
 
 // known spells listed with incorrect level/type
 COPY_EXISTING ~cuardul.cre~  ~override~
@@ -643,7 +643,7 @@ COPY_EXISTING ~cuardul.cre~  ~override~
       WRITE_SHORT ("%known_off%" + 0x0a + ("%index%" * 0x0c)) 1 // correct spell type
     END
   END
-  BUT_ONLY_IF_IT_CHANGES
+  BUT_ONLY
 
 
 // known spells listed with incorrect level/type
@@ -660,7 +660,7 @@ COPY_EXISTING ~elemep03.cre~ ~override~
       WRITE_SHORT ("%known_off%" + 0x0a + ("%index%" * 0x0c)) 2 // correct spell type
     END
   END
-  BUT_ONLY_IF_IT_CHANGES
+  BUT_ONLY
 
 // known spells listed with incorrect level/type
 COPY_EXISTING ~eyeded01.cre~ ~override~
@@ -677,7 +677,7 @@ COPY_EXISTING ~eyeded01.cre~ ~override~
       WRITE_SHORT ("%known_off%" + 0x0a + ("%index%" * 0x0c)) 0 // correct spell type
     END
   END
-  BUT_ONLY_IF_IT_CHANGES
+  BUT_ONLY
 
 // known spells listed with incorrect level/type
 COPY_EXISTING ~mepsmo01.cre~ ~override~
@@ -691,7 +691,7 @@ COPY_EXISTING ~mepsmo01.cre~ ~override~
       WRITE_SHORT ("%known_off%" + 0x08 + ("%index%" * 0x0c)) 1 // correct spell level
     END
   END
-  BUT_ONLY_IF_IT_CHANGES
+  BUT_ONLY
 
 // known spells listed with incorrect level/type
 COPY_EXISTING ~merlin.cre~ ~override~
@@ -711,7 +711,7 @@ COPY_EXISTING ~merlin.cre~ ~override~
       WRITE_SHORT ("%known_off%" + 0x08 + ("%index%" * 0x0c)) 6 // correct spell level
     END
   END
-  BUT_ONLY_IF_IT_CHANGES
+  BUT_ONLY
 
 // known spells listed with incorrect level/type
 COPY_EXISTING ~nalia18.cre~ ~override~
@@ -723,7 +723,7 @@ COPY_EXISTING ~nalia18.cre~ ~override~
       WRITE_SHORT ("%known_off%" + 0x08 + ("%index%" * 0x0c)) 7 // correct spell level
     END
   END
-  BUT_ONLY_IF_IT_CHANGES
+  BUT_ONLY
 
 // known spells listed with incorrect level/type
 COPY_EXISTING ~nalin.cre~ ~override~
@@ -735,7 +735,7 @@ COPY_EXISTING ~nalin.cre~ ~override~
       WRITE_SHORT ("%known_off%" + 0x0a + ("%index%" * 0x0c)) 2 // correct spell type
     END
   END
-  BUT_ONLY_IF_IT_CHANGES
+  BUT_ONLY
 
 // known spells listed with incorrect level/type
 COPY_EXISTING ~pcapt06.cre~ ~override~
@@ -747,7 +747,7 @@ COPY_EXISTING ~pcapt06.cre~ ~override~
       WRITE_SHORT ("%known_off%" + 0x08 + ("%index%" * 0x0c)) 2 // correct spell level
     END
   END
-  BUT_ONLY_IF_IT_CHANGES
+  BUT_ONLY
 
 // known spells listed with incorrect level/type
 COPY_EXISTING ~spidfgsu.cre~ ~override~
@@ -760,7 +760,7 @@ COPY_EXISTING ~spidfgsu.cre~ ~override~
       WRITE_SHORT ("%known_off%" + 0x0a + ("%index%" * 0x0c)) 2 // correct spell type
     END
   END
-  BUT_ONLY_IF_IT_CHANGES
+  BUT_ONLY
 
 // known spells listed with incorrect level/type
 COPY_EXISTING ~udardul.cre~  ~override~
@@ -776,7 +776,7 @@ COPY_EXISTING ~udardul.cre~  ~override~
       WRITE_SHORT ("%known_off%" + 0x0a + ("%index%" * 0x0c)) 2 // correct spell type
     END
   END
-  BUT_ONLY_IF_IT_CHANGES
+  BUT_ONLY
 
 // cleans up DLTCEP error messages
 COPY_EXISTING ~BALSHLD.SPL~  ~override~
@@ -1026,7 +1026,7 @@ COPY_EXISTING ~BALSHLD.SPL~  ~override~
               ~spwm159.spl~  ~override~
               ~spwm162.spl~  ~override~
               ~spwm188.spl~  ~override~
-  PATCH_IF (SOURCE_SIZE > 0x71) THEN BEGIN // protects against invalid files
+  PATCH_IF (SOURCE_SIZE > 0x71) BEGIN // protects against invalid files
     READ_LONG  0x64 "abil_off"
     READ_SHORT 0x68 "abil_num"
     READ_LONG  0x6a "fx_off"
@@ -1044,7 +1044,7 @@ COPY_EXISTING ~BALSHLD.SPL~  ~override~
       END
     END
   END
-  BUT_ONLY_IF_IT_CHANGES
+  BUT_ONLY
 
 // detectable spells goes here--once it's done
 
@@ -1193,7 +1193,7 @@ COPY_EXISTING ~amul18.itm~   ~override~
               ~sw1h54b.itm~  ~override~
               ~sw2h15a.itm~  ~override~
               ~tbag01.itm~   ~override~
-  PATCH_IF (SOURCE_SIZE > 0x71) THEN BEGIN // protects against invalid files
+  PATCH_IF (SOURCE_SIZE > 0x71) BEGIN // protects against invalid files
     READ_LONG   0x64 "abil_off"
     READ_SHORT  0x68 "abil_num"
     READ_LONG   0x6a "fx_off"
@@ -1218,4 +1218,4 @@ COPY_EXISTING ~amul18.itm~   ~override~
     WRITE_SHORT  0x68 "%abil_num%"
     WRITE_LONG   0x6a "%fx_off%"
   END
-  BUT_ONLY_IF_IT_CHANGES
+  BUT_ONLY
