@@ -3,10 +3,6 @@ AUTHOR ~burner1024 @ github~
 VERSION ~v0~
 
 
-BEGIN ~TLK: cleanup~
-INCLUDE ~%MOD_FOLDER%/tlk/main.tpa~
-
-
 //BEGIN ~Keyfile: cleanup~
 //INCLUDE ~%MOD_FOLDER%/key/clean.tpa~
 
@@ -41,6 +37,7 @@ BEGIN ~Creatures: equip valid items and unequip invalid ones~
 INCLUDE ~%MOD_FOLDER%/cre/inv_overhaul.tpa~
 
 BEGIN ~Creatures: misc~
+CLEAR_MEMORY
 OUTER_SPRINT comp_dir ~%MOD_FOLDER%/cre/gen_fix~
 INCLUDE ~%comp_dir%/main.tpa~
 

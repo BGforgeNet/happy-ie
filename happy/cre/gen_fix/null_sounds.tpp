@@ -12,6 +12,11 @@ FOR (i=0;i<100;i=i+1) BEGIN
       PATCH_IF (~%sound%~ STRING_EQUAL ~~) BEGIN
         PATCH_PRINT ~%SOURCE_FILE% issue: invalid soundset entry in slot %i%. Nulling.~
         WRITE_LONG (0xa4 + i * 4) (0 - 1)
+      END ELSE BEGIN
+        PATCH_IF (NOT FILE_EXISTS_IN_GAME ~%sound%.wav~) BEGIN
+          PATCH_PRINT ~%SOURCE_FILE% issue: invalid soundset entry in slot %i%. Nulling.~
+          WRITE_LONG (0xa4 + i * 4) (0 - 1)
+        END
       END
   END
 END
