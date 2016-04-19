@@ -1,5 +1,3 @@
-INCLUDE ~%MOD_FOLDER%/lib/functions.tph~  //soundsets macro
-
 COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
   PATCH_IF (SOURCE_SIZE > 0x2d3) BEGIN
     PATCH_INCLUDE ~%comp_dir%/add_missing_animation.tpp~
