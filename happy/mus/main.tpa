@@ -1,0 +1,8 @@
+ACTION_IF GAME_IS ~soa tob~ BEGIN
+  COPY_EXISTING ~music/bm2.mus~ ~music~
+    REPLACE_TEXTUALLY EXACT_MATCH ~N2~ ~N1~
+  BUT_ONLY
+  COPY_EXISTING ~music/blank.mus~ ~music~
+    REPLACE_TEXTUALLY EXACT_MATCH ~TAV1~ ~BLANK~
+  BUT_ONLY  
+END
