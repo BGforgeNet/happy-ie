@@ -1,7 +1,7 @@
 ACTION_DEFINE_ASSOCIATIVE_ARRAY filetype_size BEGIN
   are => 0x11b
   cre => 0x2d3
-  eff => 0x110
+//  eff => 0x110 //fails on ARCHSLOW.EFF
   itm => 0x71
   spl => 0x71
   sto => 0x9b
