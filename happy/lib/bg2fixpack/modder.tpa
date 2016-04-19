@@ -8,7 +8,7 @@ INCLUDE ~%MOD_FOLDER%/lib/bg2fixpack/ids_entries_animate.tph~
 INCLUDE ~%MOD_FOLDER%/lib/bg2fixpack/ids_entries_anisnd.tph~
 INCLUDE ~%MOD_FOLDER%/lib/bg2fixpack/ids_entries_gtimes.tph~
 INCLUDE ~%MOD_FOLDER%/lib/bg2fixpack/ids_entries_shoutids.tph~
-// INCLUDE ~%MOD_FOLDER%/lib/bg2fixpack/ids_entries_specific.tph~ // no one was happy with these entries
+INCLUDE ~%MOD_FOLDER%/lib/bg2fixpack/ids_entries_specific.tph~ // no one was happy with these entries
 INCLUDE ~%MOD_FOLDER%/lib/bg2fixpack/ids_entries_spell.tph~
 
 COPY_EXISTING ~damages.ids~ ~override~
