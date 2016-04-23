@@ -23,6 +23,9 @@ BEGIN ~Areas: misc~
 OUTER_SPRINT comp_dir ~%MOD_FOLDER%/are~
 INCLUDE ~%comp_dir%/main.tpa~
 
+BEGIN ~IDS: misc~
+OUTER_SPRINT comp_dir ~%MOD_FOLDER%/ids~
+INCLUDE ~%comp_dir%/main.tpa~
 
 BEGIN ~Creatures: structure~
 INCLUDE ~%MOD_FOLDER%/cre/init_fix.tpa~
