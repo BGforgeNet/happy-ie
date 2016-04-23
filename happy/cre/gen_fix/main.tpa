@@ -6,5 +6,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
     PATCH_INCLUDE ~%comp_dir%/fix_spells.tpp~
     PATCH_INCLUDE ~%comp_dir%/null_sounds.tpp~
     PATCH_INCLUDE ~%comp_dir%/remove_useless_effects.tpp~
+    PATCH_INCLUDE ~%comp_dir%/add_racial_enemy.tpp~
+    PATCH_INCLUDE ~%comp_dir%/set_missing_alignment.tpp~
   END
 BUT_ONLY

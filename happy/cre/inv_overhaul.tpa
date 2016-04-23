@@ -762,23 +762,25 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
     selected_item_index = 0xffff
     SPRINT selected_item ~~
     READ_SHORT slot_off+38*0x2 selected_weapon_slot
-//    PATCH_PRINT ~selected_weapon_slot=%selected_weapon_slot%~
+//    PATCH_PRINT ~%SOURCE_FILE%: selected_weapon_slot=%selected_weapon_slot%~
     PATCH_IF (selected_weapon_slot >= 0 AND selected_weapon_slot < 4) BEGIN
       READ_SHORT (slot_off + (selected_weapon_slot + 9) * 0x2) selected_item_index
-//      PATCH_PRINT ~selected_item_index=%selected_item_index%~
+//      PATCH_PRINT ~%SOURCE_FILE%: selected_item_index=%selected_item_index%~
     END
     PATCH_IF NOT (selected_item_index = 0xffff) BEGIN
       READ_ASCII (itm_off + selected_item_index * 0x14) selected_item
-//      PATCH_PRINT ~selected_item=%selected_item%~
+//      PATCH_PRINT ~%SOURCE_FILE%: selected_item=%selected_item%~
     END
     PATCH_IF (NOT ~%selected_item%~ STRING_EQUAL ~~) BEGIN //we're all good
       weapon_present = 1
       weapon_selected = 1
-//      PATCH_PRINT ~weapons good~
+//      PATCH_PRINT ~%SOURCE_FILE%: weapons good~
     END ELSE BEGIN
+//      PATCH_PRINT ~%SOURCE_FILE%: looking for weapons in current slots~
       PATCH_FOR_EACH inv_slot IN 9 10 11 12 BEGIN
         READ_SHORT (slot_off + inv_slot * 0x2) item_index
-        PATCH_IF ((weapon_present = 0) AND (NOT item_index = 0xffff)) BEGIN //there's a weapon, but it's not selected
+//        PATCH_PRINT ~%SOURCE_FILE%: found item %item_index% in %inv_slot%. weapon_present=%weapon_present%~
+        PATCH_IF ((weapon_present = 0) AND NOT (item_index = 0xffff)) BEGIN //there's a weapon, but it's not selected
           weapon_present = 1
           weapon_present_slot = inv_slot - 9
           PATCH_PRINT ~%SOURCE_FILE% issue: equipped weapon not selected! Selecting WEAPON%weapon_present_slot%~
