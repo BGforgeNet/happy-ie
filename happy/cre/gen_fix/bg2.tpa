@@ -1,0 +1,5 @@
+COPY_EXISTING
+  ~keldor8.cre~ ~override~
+  ~keldor9.cre~ ~override~
+  WRITE_LONG 0x244 0x40050000 //inquisitor
+BUT_ONLY

@@ -1,3 +1,5 @@
 COPY_EXISTING ~trigger.ids~ ~override~
   REPLACE_TEXTUALLY EXACT_MATCH ~0x401f TimeOfDay(I:Time Of Day*TimeODay)~ ~0x401f TimeOfDay(I:TimeOfDay*TimeODay)~
 BUT_ONLY
+
+APPEND ~ea.ids~ ~127 GOOTBUTDEAD~ UNLESS ~^127~

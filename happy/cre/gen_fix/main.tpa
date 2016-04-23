@@ -10,3 +10,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
     PATCH_INCLUDE ~%comp_dir%/set_missing_alignment.tpp~
   END
 BUT_ONLY
+
+ACTION_IF GAME_INCLUDES ~bg2~ BEGIN
+  INCLUDE ~%comp_dir%/bg2.tpa~ //BG2-specific fixes
+END
