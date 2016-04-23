@@ -21,14 +21,14 @@ END
 
 PATCH_IF alignment = 0 BEGIN
   READ_BYTE 0x272 race
-  LOOKUP_IDS_SYMBOL_OF_INT race_ids ~race~ race
+  LOOKUP_IDS_SYMBOL_OF_INT race_id ~race~ race
   PATCH_IF VARIABLE_IS_SET $race_to_al("%race%") BEGIN
     new_al = EVAL $race_to_al("%race%")
     LOOKUP_IDS_SYMBOL_OF_INT new_al_ids ~alignmen~ new_al
-    PATCH_PRINT ~%SOURCE_FILE% issue: missing alignment for creature race %race%=%race_ids%. Selecting %new_al%=%new_al_ids%~
+    PATCH_PRINT ~%SOURCE_FILE% issue: missing alignment for creature race %race_id%. Changing to True Neutral.~
     WRITE_BYTE 0x27b %new_al%
   END
   /*  ELSE BEGIN
-    PATCH_PRINT ~%SOURCE_FILE% issue: missing alignment for creature race %race%=%race_ids%. Not correcting~
+    PATCH_PRINT ~%SOURCE_FILE% issue: missing alignment for creature race %race%=%race_id%. Not correcting~
   END */
 END
