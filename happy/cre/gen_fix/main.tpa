@@ -1,3 +1,7 @@
+ACTION_IF GAME_INCLUDES ~bg2~ BEGIN
+  INCLUDE ~%comp_dir%/bg2.tpa~ //BG2-specific fixes
+END
+
 COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
   PATCH_IF (SOURCE_SIZE > 0x2d3) BEGIN
     PATCH_INCLUDE ~%comp_dir%/add_missing_animation.tpp~
@@ -8,9 +12,6 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
     PATCH_INCLUDE ~%comp_dir%/remove_useless_effects.tpp~
     PATCH_INCLUDE ~%comp_dir%/add_racial_enemy.tpp~
     PATCH_INCLUDE ~%comp_dir%/set_missing_alignment.tpp~
+    PATCH_INCLUDE ~%comp_dir%/fix_kit.tpp~
   END
 BUT_ONLY
-
-ACTION_IF GAME_INCLUDES ~bg2~ BEGIN
-  INCLUDE ~%comp_dir%/bg2.tpa~ //BG2-specific fixes
-END
