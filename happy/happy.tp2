@@ -64,8 +64,8 @@ INCLUDE ~%MOD_FOLDER%/itm/add_missing_immunity.tpa~
 BEGIN ~Items: remove duplicate effects~
 INCLUDE ~%MOD_FOLDER%/itm/remove_dup_effect.tpa~
 
-BEGIN ~Items: remove useless effects~
-INCLUDE ~%MOD_FOLDER%/itm/remove_useless_effects.tpa~
+BEGIN ~Items: remove invalid effects~
+INCLUDE ~%MOD_FOLDER%/itm/remove_invalid_effects.tpa~
 
 BEGIN ~Items: fix enchantment level~
 INCLUDE ~%MOD_FOLDER%/itm/fix_enchantment.tpa~

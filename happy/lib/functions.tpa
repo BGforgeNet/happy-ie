@@ -1,0 +1,204 @@
+DEFINE_PATCH_FUNCTION ~G_DELETE_ITEM_EFFECT~
+  INT_VAR
+    check_globals  = 0      // check global effects: 0 for no, 1 for yes
+    check_headers  = 1      // check effects on headers; 0 for no, 1 for yes
+    opcode         = "-2"   // "-1" matches all. "-2" matches none
+    opcode_to_delete = "-1"   // "-1" matches all. "-2" matches none
+    target         = "-1"   // change target at 0x02; negative values mean no change
+    timing         = "-1"   // change timing at 0x0c; negative values mean no change
+    power          = "-1"   // change power level at 0x03; negative values mean no change
+    parameter1     = 999   // change parameter at 0x04; negative values mean no change
+    parameter2     = 999   // change parameter at 0x08; negative values mean no change
+    resist_dispel  = "-1"   // change resist/dispel at 0x0d; negative values mean no change
+    duration       = "-1"   // change duration at 0x0e; negative values mean no change
+    probability1   = "-1"   // change high probability at 0x12; negative values mean no change
+    probability2   = "-1"   // change low probability at 0x13; negative values mean no change
+    dicenumber     = "-1"   // change number of dice at 0x1c; negative values mean no change
+    dicesize       = "-1"   // change size of dice at 0x20; negative values mean no change
+    savingthrow    = "-1"   // changing type of saving throw at 0x24; negative values mean no change
+    savebonus      = 999  // change save bonus/penalty; values -11 or lower are ignored
+    special        = "-1"   // change special; negative values mean no change
+  STR_VAR
+    resource       = ~g_none~ // resref at 0x14; same means no change, otherwise use this value
+BEGIN
+  fx_size = 0x30
+  header_length = 0x38
+  PATCH_IF (BUFFER_LENGTH > 0x71) BEGIN
+    READ_LONG  0x64 ab_off
+    READ_SHORT 0x68 ab_num
+    READ_LONG  0x6a fx_off
+    READ_SHORT 0x6e eq_fx_idx
+    READ_SHORT 0x70 eq_fx_num
+
+    PATCH_IF check_globals = 1 BEGIN
+      FOR (i1 = 0 ; i1 < eq_fx_num ; i1 = i1 + 1) BEGIN //cycle through global effects
+        cur_off = fx_off + (eq_fx_idx + i1) * fx_size
+
+        READ_SHORT  cur_off         opcode_m //opcode_match
+        READ_BYTE  (cur_off + 0x02) target_m
+        READ_BYTE  (cur_off + 0x03) power_m
+        READ_LONG  (cur_off + 0x04) parameter1_m
+        READ_LONG  (cur_off + 0x08) parameter2_m
+        READ_BYTE  (cur_off + 0x0c) timing_m
+        READ_BYTE  (cur_off + 0x0d) resist_dispel_m
+        READ_LONG  (cur_off + 0x0e) duration_m
+        READ_BYTE  (cur_off + 0x12) probability1_m
+        READ_BYTE  (cur_off + 0x13) probability2_m
+        READ_ASCII (cur_off + 0x14) resource_m
+        READ_LONG  (cur_off + 0x1c) dicenumber_m
+        READ_LONG  (cur_off + 0x20) dicesize_m
+        READ_LONG  (cur_off + 0x24) savingthrow_m
+        READ_LONG  (cur_off + 0x28) savebonus_m
+        READ_LONG  (cur_off + 0x2c) special_m
+
+        match = 1
+        PATCH_FOR_EACH field IN
+          opcode
+          target
+          timing
+          power
+          resist_dispel
+          duration
+          probability1
+          probability2
+          dicenumber
+          dicesize
+          savingthrow
+          special
+        BEGIN
+          SET field2 = EVAL ~%field%~
+          SET field3 = EVAL ~%%field%_m%~
+          PATCH_IF (match = 1) AND (field2 != "-1") AND (field2 != field3) BEGIN
+            match = 0
+          END
+        END
+        PATCH_FOR_EACH field IN
+          parameter1
+          parameter2
+          savebonus
+        BEGIN
+          SET field2 = EVAL ~%field%~
+          SET field3 = EVAL ~%%field%_m%~
+          PATCH_IF (match = 1) AND (field2 != 999) AND (field2 != field3) BEGIN
+            match = 0
+          END
+        END
+        PATCH_IF ( (match = 1) AND NOT (~%resource%~ STR_EQ ~g_none~) AND NOT (~%resource%~ STR_EQ ~%resource_m%~) ) BEGIN
+          match = 0
+        END
+        PATCH_IF opcode = "-1" BEGIN
+          match = 1
+        END
+        PATCH_IF opcode = "-2" BEGIN
+          match = 0
+        END
+
+        PATCH_IF match = 1 BEGIN
+          DELETE_BYTES cur_off fx_size
+          eq_fx_num = eq_fx_num - 1
+          WRITE_SHORT 0x70 eq_fx_num
+
+          FOR (i2 = 0 ; i2 < ab_num ; i2 = i2 + 1) BEGIN //correcting 1st effect indexes
+            READ_SHORT (ab_off + i2 * header_length + 0x20) 1fx_idx
+            PATCH_IF (1fx_idx > i1) BEGIN //if ability after current effect
+              WRITE_SHORT (ab_off + i2 * header_length + 0x20) (1fx_idx - 1) //decrease 1st effect idx by 1
+            END
+          END
+          //no offsets to correct
+          i1 = i1 - 1
+        END
+      END
+    END //end delete global effects
+
+
+    PATCH_IF check_headers = 1 BEGIN
+      READ_LONG  0x64 ab_off
+      READ_SHORT 0x68 ab_num
+      READ_LONG  0x6a fx_off
+      FOR (i1 = 0 ; i1 < ab_num ; i1 = i1 + 1) BEGIN //cycling through extended headers
+        READ_SHORT (ab_off + 0x1e + (header_length * i1)) ab_fx_num
+        READ_SHORT (ab_off + 0x20 + (header_length * i1)) ab_fx_idx
+        FOR (i2 = ab_fx_idx ; i2 < (ab_fx_idx + ab_fx_num) ; i2 = i2 + 1) BEGIN //cycling through ability's effects
+          cur_off = (fx_off + fx_size * i2)
+
+          READ_SHORT  cur_off         opcode_m //opcode_match
+          READ_BYTE  (cur_off + 0x02) target_m
+          READ_BYTE  (cur_off + 0x03) power_m
+          READ_LONG  (cur_off + 0x04) parameter1_m
+          READ_LONG  (cur_off + 0x08) parameter2_m
+          READ_BYTE  (cur_off + 0x0c) timing_m
+          READ_BYTE  (cur_off + 0x0d) resist_dispel_m
+          READ_LONG  (cur_off + 0x0e) duration_m
+          READ_BYTE  (cur_off + 0x12) probability1_m
+          READ_BYTE  (cur_off + 0x13) probability2_m
+          READ_ASCII (cur_off + 0x14) resource_m
+          READ_LONG  (cur_off + 0x1c) dicenumber_m
+          READ_LONG  (cur_off + 0x20) dicesize_m
+          READ_LONG  (cur_off + 0x24) savingthrow_m
+          READ_LONG  (cur_off + 0x28) savebonus_m
+          READ_LONG  (cur_off + 0x2c) special_m
+
+          match = 1
+          PATCH_FOR_EACH field IN
+            opcode
+            target
+            timing
+            power
+            resist_dispel
+            duration
+            probability1
+            probability2
+            dicenumber
+            dicesize
+            savingthrow
+            special
+          BEGIN
+            SET field2 = EVAL ~%field%~
+            SET field3 = EVAL ~%%field%_m%~
+            PATCH_IF (match = 1) AND (field2 != "-1") AND (field2 != field3) BEGIN
+              match = 0
+            END
+          END
+          PATCH_FOR_EACH field IN
+            parameter1
+            parameter2
+            savebonus
+          BEGIN
+            SET field2 = EVAL ~%field%~
+            SET field3 = EVAL ~%%field%_m%~
+            PATCH_IF (match = 1) AND (field2 != 999) AND (field2 != field3) BEGIN
+              match = 0
+            END
+          END
+          PATCH_IF ( (match = 1) AND NOT (~%resource%~ STR_EQ ~g_none~) AND NOT (~%resource%~ STR_EQ ~%resource_m%~) ) BEGIN
+            match = 0
+          END
+          PATCH_IF opcode = "-1" BEGIN
+            match = 1
+          END
+          PATCH_IF opcode = "-2" BEGIN
+            match = 0
+          END
+
+          PATCH_IF match = 1 BEGIN
+            DELETE_BYTES cur_off fx_size
+            ab_fx_num = ab_fx_num - 1 //for stopping cycle properly
+            WRITE_SHORT (ab_off + 0x1e + (header_length * i1)) ab_fx_num //correct number of effects in ability
+
+            FOR (i3 = 0 ; i3 < ab_num ; i3 = i3 + 1) BEGIN //correct 1st effect index, cycle through abilities again
+              READ_SHORT (ab_off + i3 * header_length + 0x20) 1fx_idx
+              PATCH_IF (1fx_idx > i2) BEGIN //if next ability
+                WRITE_SHORT (ab_off + i3 * header_length + 0x20) (1fx_idx - 1) //decrease 1st effect idx by 1
+              END
+            END
+            //no offsets to correct
+            i2 = i2 - 1 //step back to not miss an effect
+          END
+        END
+      END
+    END //end delete ab effects
+
+  END ELSE BEGIN
+    PATCH_PRINT ~WARNING: %SOURCE_FILE% is invalid!~
+  END
+END
