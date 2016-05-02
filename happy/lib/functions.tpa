@@ -2,22 +2,22 @@ DEFINE_PATCH_FUNCTION ~G_DELETE_ITEM_EFFECT~
   INT_VAR
     check_globals  = 0      // check global effects: 0 for no, 1 for yes
     check_headers  = 1      // check effects on headers; 0 for no, 1 for yes
-    opcode         = "-2"   // "-1" matches all. "-2" matches none
-    opcode_to_delete = "-1"   // "-1" matches all. "-2" matches none
-    target         = "-1"   // change target at 0x02; negative values mean no change
-    timing         = "-1"   // change timing at 0x0c; negative values mean no change
-    power          = "-1"   // change power level at 0x03; negative values mean no change
-    parameter1     = 999   // change parameter at 0x04; negative values mean no change
-    parameter2     = 999   // change parameter at 0x08; negative values mean no change
-    resist_dispel  = "-1"   // change resist/dispel at 0x0d; negative values mean no change
-    duration       = "-1"   // change duration at 0x0e; negative values mean no change
-    probability1   = "-1"   // change high probability at 0x12; negative values mean no change
-    probability2   = "-1"   // change low probability at 0x13; negative values mean no change
-    dicenumber     = "-1"   // change number of dice at 0x1c; negative values mean no change
-    dicesize       = "-1"   // change size of dice at 0x20; negative values mean no change
-    savingthrow    = "-1"   // changing type of saving throw at 0x24; negative values mean no change
-    savebonus      = 999  // change save bonus/penalty; values -11 or lower are ignored
-    special        = "-1"   // change special; negative values mean no change
+    opcode         = "-2"   // "-1" will force match any effect, regardless of other parameters
+    opcode_to_delete = "-2"   //backwards compatibility. Default was 0. "-1" matched all.
+    target         = "-1"   // target at 0x02
+    timing         = "-1"   // timing at 0x0c
+    power          = "-1"   // power level at 0x03
+    parameter1     = 999   // parameter 1 at 0x04
+    parameter2     = 999   // parameter 2 at 0x08
+    resist_dispel  = "-1"   // resist/dispel at 0x0d
+    duration       = "-1"   // duration at 0x0e
+    probability1   = "-1"   // high probability at 0x12
+    probability2   = "-1"   // low probability at 0x13
+    dicenumber     = "-1"   // number of dice at 0x1c
+    dicesize       = "-1"   // size of dice at 0x20
+    savingthrow    = "-1"   // changing type of saving throw at 0x24
+    savebonus      = 999  // save bonus/penalty
+    special        = "-1"   // special
   STR_VAR
     resource       = ~g_none~ // resref at 0x14; same means no change, otherwise use this value
 BEGIN
@@ -53,7 +53,7 @@ BEGIN
 
         match = 1
         PATCH_FOR_EACH field IN
-          opcode
+//          opcode
           target
           timing
           power
@@ -66,19 +66,22 @@ BEGIN
           savingthrow
           special
         BEGIN
-          SET field2 = EVAL ~%field%~
-          SET field3 = EVAL ~%%field%_m%~
+          field2 = EVAL ~%field%~
+          field3 = EVAL ~%%field%_m%~
           PATCH_IF (match = 1) AND (field2 != "-1") AND (field2 != field3) BEGIN
             match = 0
           END
+        END
+        PATCH_IF match = 1 AND opcode != "-2" AND opcode != opcode_m BEGIN
+          match = 0
         END
         PATCH_FOR_EACH field IN
           parameter1
           parameter2
           savebonus
         BEGIN
-          SET field2 = EVAL ~%field%~
-          SET field3 = EVAL ~%%field%_m%~
+          field2 = EVAL ~%field%~
+          field3 = EVAL ~%%field%_m%~
           PATCH_IF (match = 1) AND (field2 != 999) AND (field2 != field3) BEGIN
             match = 0
           END
@@ -86,11 +89,9 @@ BEGIN
         PATCH_IF ( (match = 1) AND NOT (~%resource%~ STR_EQ ~g_none~) AND NOT (~%resource%~ STR_EQ ~%resource_m%~) ) BEGIN
           match = 0
         END
-        PATCH_IF opcode = "-1" BEGIN
+
+        PATCH_IF opcode = "-1" BEGIN //force match
           match = 1
-        END
-        PATCH_IF opcode = "-2" BEGIN
-          match = 0
         END
 
         PATCH_IF match = 1 BEGIN
@@ -140,7 +141,7 @@ BEGIN
 
           match = 1
           PATCH_FOR_EACH field IN
-            opcode
+//            opcode
             target
             timing
             power
@@ -153,19 +154,22 @@ BEGIN
             savingthrow
             special
           BEGIN
-            SET field2 = EVAL ~%field%~
-            SET field3 = EVAL ~%%field%_m%~
+            field2 = EVAL ~%field%~
+            field3 = EVAL ~%%field%_m%~
             PATCH_IF (match = 1) AND (field2 != "-1") AND (field2 != field3) BEGIN
               match = 0
             END
+          END
+          PATCH_IF match = 1 AND opcode != "-2" AND opcode != opcode_m BEGIN
+            match = 0
           END
           PATCH_FOR_EACH field IN
             parameter1
             parameter2
             savebonus
           BEGIN
-            SET field2 = EVAL ~%field%~
-            SET field3 = EVAL ~%%field%_m%~
+            field2 = EVAL ~%field%~
+            field3 = EVAL ~%%field%_m%~
             PATCH_IF (match = 1) AND (field2 != 999) AND (field2 != field3) BEGIN
               match = 0
             END
@@ -173,12 +177,43 @@ BEGIN
           PATCH_IF ( (match = 1) AND NOT (~%resource%~ STR_EQ ~g_none~) AND NOT (~%resource%~ STR_EQ ~%resource_m%~) ) BEGIN
             match = 0
           END
+
           PATCH_IF opcode = "-1" BEGIN
             match = 1
           END
-          PATCH_IF opcode = "-2" BEGIN
-            match = 0
+
+          //backwards compatibility with DELETE_ITEM_EFFECT
+          PATCH_IF opcode_to_delete > 0 AND opcode_to_delete = opcode_m BEGIN //backwards compatibility 1: specific opcode
+            match = 1
           END
+          PATCH_IF opcode_to_delete = "-1" BEGIN //backwards compatibility 2: any opcode
+            match = 1
+          END
+          PATCH_IF //backwards compatibility 3: default opcode of 0. All variables must be default.
+            opcode_to_delete = 0  AND
+            check_globals  = 0    AND
+            check_headers  = 1    AND
+            opcode         = "-1" AND
+            target         = "-1" AND
+            timing         = "-1" AND
+            power          = "-1" AND
+            parameter1     = 999  AND
+            parameter2     = 999  AND
+            resist_dispel  = "-1" AND
+            duration       = "-1" AND
+            probability1   = "-1" AND
+            probability2   = "-1" AND
+            dicenumber     = "-1" AND
+            dicesize       = "-1" AND
+            savingthrow    = "-1" AND
+            savebonus      = 999  AND
+            special        = "-1" AND
+            resource  STRING_EQUAL ~g_none~ AND //end default vars
+            opcode_m = 0 //actual opcode in current effect
+          BEGIN
+            match = 1
+          END
+          //end backwards compatibility with DELETE_ITEM_EFFECT
 
           PATCH_IF match = 1 BEGIN
             DELETE_BYTES cur_off fx_size
