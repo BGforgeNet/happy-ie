@@ -1,7 +1,7 @@
 COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
   PATCH_IF (SOURCE_SIZE > 0x71) BEGIN
     READ_BYTE  0x18 "flags"
-    PATCH_IF (("%flags%" BAND 0b00000100) = 0b00000100) BEGIN  // droppable
+//    PATCH_IF (("%flags%" BAND 0b00000100) = 0b00000100) BEGIN  // droppable
       PATCH_INCLUDE ~%comp_dir%/set_2_hand.tpp~
       PATCH_INCLUDE ~%comp_dir%/null_missing_used_up.tpp~
       PATCH_INCLUDE ~%comp_dir%/create_missing_store_link.tpp~
@@ -15,6 +15,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
       PATCH_INCLUDE ~%comp_dir%/fix_eq_effect.tpp~
       PATCH_INCLUDE ~%comp_dir%/fix_eq_duration.tpp~
       PATCH_INCLUDE ~%comp_dir%/fix_alt_damage.tpp~
+      PATCH_INCLUDE ~%comp_dir%/fix_strrefs.tpp~
     END
-  END
+//  END
 BUT_ONLY
