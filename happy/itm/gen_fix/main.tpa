@@ -14,6 +14,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
       PATCH_INCLUDE ~%comp_dir%/fix_ability_animation.tpp~
       PATCH_INCLUDE ~%comp_dir%/fix_eq_effect.tpp~
       PATCH_INCLUDE ~%comp_dir%/fix_eq_duration.tpp~
+      PATCH_INCLUDE ~%comp_dir%/fix_alt_damage.tpp~
     END
   END
 BUT_ONLY
