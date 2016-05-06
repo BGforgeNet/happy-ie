@@ -19,5 +19,6 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
     PATCH_INCLUDE ~%comp_dir%/fix_strrefs.tpp~
     PATCH_INCLUDE ~%comp_dir%/fix_ext_fx_duration.tpp~
     PATCH_INCLUDE ~%comp_dir%/fix_prof.tpp~
+    PATCH_INCLUDE ~%comp_dir%/fix_paperdoll_anim.tpp~
   END
 BUT_ONLY
