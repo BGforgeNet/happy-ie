@@ -20,5 +20,6 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
     PATCH_INCLUDE ~%comp_dir%/fix_ext_fx_duration.tpp~
     PATCH_INCLUDE ~%comp_dir%/fix_prof.tpp~
     PATCH_INCLUDE ~%comp_dir%/fix_paperdoll_anim.tpp~
+    PATCH_INCLUDE ~%comp_dir%/check_inventory_bam.tpp~
   END
 BUT_ONLY
