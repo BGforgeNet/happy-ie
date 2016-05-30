@@ -21,5 +21,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
     PATCH_INCLUDE ~%comp_dir%/fix_prof.tpp~
     PATCH_INCLUDE ~%comp_dir%/fix_paperdoll_anim.tpp~
     PATCH_INCLUDE ~%comp_dir%/check_inventory_bam.tpp~
+    PATCH_INCLUDE ~%comp_dir%/fix_melee_projectile.tpp~
+    PATCH_INCLUDE ~%comp_dir%/fix_melee_charges.tpp~
   END
 BUT_ONLY

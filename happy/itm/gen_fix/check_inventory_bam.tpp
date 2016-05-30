@@ -29,6 +29,7 @@ PATCH_IF type != 0xb BEGIN //scroll
           PATCH_PRINT ~%real_src% (type %type%): inventory bam %inv_bam% has %frm_cnt% frames.~
         END
       BUT_ONLY
+      OUTER_SPRINT SOURCE_FILE ~%real_src%~ //reset SOURCE_FILE for later PATCH_PRINT's
     END
   END
 END
