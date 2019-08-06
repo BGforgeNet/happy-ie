@@ -1,0 +1,4 @@
+GET_OFFSET_ARRAY items CRE_V10_ITEMS
+PHP_EACH items AS int => item BEGIN
+  PATCH_IF 
+END
