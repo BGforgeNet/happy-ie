@@ -24,7 +24,7 @@ COPY_EXISTING ~happy.ids~ ~override~
   UNLESS ~^IDS V1\.0~
 
 ACTION_IF NOT FILE_EXISTS_IN_GAME ~moraleai.ids~ BEGIN
-  COPY ~bg2fixpack/ids/moraleai.ids~ ~override~
+  COPY ~%MOD_FOLDER%/lib/bg2fixpack/moraleai.ids~ ~override~
 END
 
 COPY_EXISTING ~slots.ids~    ~override~
@@ -363,8 +363,8 @@ BUT_ONLY
 // detectable spells goes here--once it's done
 
 //blank music file
-COPY ~bg2fixpack/mus/G3Blank.mus~ ~music/G3Blank.mus~
-  
+COPY ~%MOD_FOLDER%/lib/bg2fixpack/g3blank.mus~ ~music/g3blank.mus~
+
 // strips extraneous default(0) abiity headers from items to prevent nishruu eating
 COPY_EXISTING ~amul18.itm~   ~override~
               ~amul27.itm~   ~override~
