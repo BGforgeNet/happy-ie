@@ -69,7 +69,7 @@ COPY_EXISTING ~ar0311.are~ ~override~
     END
   END
 BUT_ONLY
-  
+
 // removing spurious trap flags
 COPY_EXISTING ~ar0327.are~ ~override~
               ~ar0417.are~ ~override~
