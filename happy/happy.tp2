@@ -12,7 +12,8 @@ INCLUDE ~%MOD_FOLDER%/gen/wipe.tpa~
 
 
 BEGIN ~Happy modder pack~
-REQUIRE_PREDICATE ENGINE_IS ~soa tob~ // many tob-specific workarounds there. TODO: make applicable to all engines.
+// many tob-specific workarounds here. TODO: make applicable to all engines.
+REQUIRE_PREDICATE ENGINE_IS ~soa tob~ ~Only applicable to classic ToB or SoA currently~
 INCLUDE ~%MOD_FOLDER%/lib/bg2fixpack/modder.tpa~
 
 
