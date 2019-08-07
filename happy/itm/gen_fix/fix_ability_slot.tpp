@@ -9,31 +9,31 @@ PATCH_IF (abil_off > 0x71) BEGIN
     READ_BYTE  ("%abil_off%" + 0x02 + (0x38 * "%index%")) "slot"
     PATCH_IF ((((%type% > 14) AND (%type% < 31)) OR %type% = 44) AND (("%abil_type%" = 1) OR ("%abil_type%" = 2) OR ("%abil_type%" = 4)) AND ("%slot%" != 1)) BEGIN
       PATCH_IF ("%slot%" = 2) BEGIN
-        PATCH_PRINT "%SOURCE_FILE% issue: Ability #%index% assigned to WEAPON slot (was SPELL)..."
+        PATCH_PRINT "HI28: %SOURCE_FILE% - Ability #%index% assigned to WEAPON slot (was SPELL)..."
       END ELSE
       PATCH_IF ("%slot%" = 3) BEGIN
-        PATCH_PRINT "%SOURCE_FILE% issue: Ability #%index% assigned to WEAPON slot (was EQUIPMENT)..."
+        PATCH_PRINT "HI29: %SOURCE_FILE% - Ability #%index% assigned to WEAPON slot (was EQUIPMENT)..."
       END ELSE
       PATCH_IF ("%slot%" = 4) BEGIN
-        PATCH_PRINT "%SOURCE_FILE% issue: Ability #%index% assigned to WEAPON slot (was INNATE)..."
+        PATCH_PRINT "HI30: %SOURCE_FILE% - Ability #%index% assigned to WEAPON slot (was INNATE)..."
       END ELSE
       BEGIN
-        PATCH_PRINT "%SOURCE_FILE% issue: Ability #%index% assigned to WEAPON slot (was %slot%)..."
+        PATCH_PRINT "HI31: %SOURCE_FILE% - Ability #%index% assigned to WEAPON slot (was %slot%)..."
       END
       WRITE_BYTE  ("%abil_off%" + 0x02 + (0x38 * "%index%")) 1
     END
     PATCH_IF ((%type% < 15 OR ((%type% > 30) AND (%type% != 44))) AND ("%abil_type%" = 3) AND ("%slot%" != 3)) BEGIN
       PATCH_IF ("%slot%" = 1) BEGIN
-        PATCH_PRINT "%SOURCE_FILE% issue: Ability #%index% assigned to EQUIPMENT slot (was WEAPON)..."
+        PATCH_PRINT "HI32: %SOURCE_FILE% - Ability #%index% assigned to EQUIPMENT slot (was WEAPON)..."
       END ELSE
       PATCH_IF ("%slot%" = 2) BEGIN
-        PATCH_PRINT "%SOURCE_FILE% issue: Ability #%index% assigned to EQUIPMENT slot (was SPELL)..."
+        PATCH_PRINT "HI33: %SOURCE_FILE% - Ability #%index% assigned to EQUIPMENT slot (was SPELL)..."
       END ELSE
       PATCH_IF ("%slot%" = 4) BEGIN
-        PATCH_PRINT "%SOURCE_FILE% issue: Ability #%index% assigned to EQUIPMENT slot (was INNATE)..."
+        PATCH_PRINT "HI34: %SOURCE_FILE% - Ability #%index% assigned to EQUIPMENT slot (was INNATE)..."
       END ELSE
       BEGIN
-        PATCH_PRINT "%SOURCE_FILE% issue: Ability #%index% assigned to EQUIPMENT slot (was %slot%)..."
+        PATCH_PRINT "HI35: %SOURCE_FILE% - Ability #%index% assigned to EQUIPMENT slot (was %slot%)..."
       END
       WRITE_BYTE  ("%abil_off%" + 0x02 + (0x38 * "%index%")) 3
     END

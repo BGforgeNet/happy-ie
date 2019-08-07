@@ -11,7 +11,7 @@ FOR (i=0;i<fx_num;i=i+1) BEGIN
   PATCH_IF (opcode = 206) BEGIN //protection from spell
     READ_ASCII (cur_off+res_off) spell
     PATCH_IF NOT FILE_EXISTS_IN_GAME ~%spell%.spl~ BEGIN
-      PATCH_PRINT ~%SOURCE_FILE% issue: protection from non-existent spell %spell%. Removing~
+      PATCH_PRINT ~HW26: %SOURCE_FILE% - protection from non-existent spell %spell%. Removing~
       DELETE_BYTES (fx_off + i * eff_size) eff_size
       fx_num = fx_num - 1 //decrease effects number to stop cycle properly
       i = i - 1 //step back to not miss an effect

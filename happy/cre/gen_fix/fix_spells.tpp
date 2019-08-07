@@ -16,37 +16,37 @@ PATCH_IF (known_off > 0x2d3) BEGIN
       READ_SHORT ("%known_off%" + 0x0a + ("%index%" * 0x0c)) "type"
       PATCH_IF (("%spl_type%" = 2) AND ("%type%" != 0)) BEGIN // priest
         PATCH_IF ("%type%" = 1) BEGIN
-          PATCH_PRINT "%SOURCE_FILE% issue: Known spell (%resref%.SPL) is a PRIEST spell (was MAGE)..."
+          PATCH_PRINT "HW9: %SOURCE_FILE% - Known spell (%resref%.SPL) is a PRIEST spell (was MAGE)..."
         END ELSE
         PATCH_IF ("%type%" = 2) BEGIN
-          PATCH_PRINT "%SOURCE_FILE% issue: Known spell (%resref%.SPL) is a PRIEST spell (was INNATE)..."
+          PATCH_PRINT "HW10: %SOURCE_FILE% - Known spell (%resref%.SPL) is a PRIEST spell (was INNATE)..."
         END ELSE
         BEGIN
-          PATCH_PRINT "%SOURCE_FILE% issue: Known spell (%resref%.SPL) is a PRIEST spell (was %type%)..."
+          PATCH_PRINT "HW11: %SOURCE_FILE% - Known spell (%resref%.SPL) is a PRIEST spell (was %type%)..."
         END
         WRITE_SHORT ("%known_off%" + 0x0a + ("%index%" * 0x0c)) 0
       END
       PATCH_IF (("%spl_type%" = 1) AND ("%type%" != 1)) BEGIN // mage
         PATCH_IF ("%type%" = 0) BEGIN
-          PATCH_PRINT "%SOURCE_FILE% issue: Known spell (%resref%.SPL) is a MAGE spell (was PRIEST)..."
+          PATCH_PRINT "HW12 - %SOURCE_FILE% - Known spell (%resref%.SPL) is a MAGE spell (was PRIEST)..."
         END ELSE
         PATCH_IF ("%type%" = 2) BEGIN
-          PATCH_PRINT "%SOURCE_FILE% issue: Known spell (%resref%.SPL) is a MAGE spell (was INNATE)..."
+          PATCH_PRINT "HW13 - %SOURCE_FILE% - Known spell (%resref%.SPL) is a MAGE spell (was INNATE)..."
         END ELSE
         BEGIN
-          PATCH_PRINT "%SOURCE_FILE% issue: Known spell (%resref%.SPL) is a MAGE spell (was %type%)..."
+          PATCH_PRINT "HW14: %SOURCE_FILE% - Known spell (%resref%.SPL) is a MAGE spell (was %type%)..."
         END
         WRITE_SHORT ("%known_off%" + 0x0a + ("%index%" * 0x0c)) 1
       END
       PATCH_IF (("%spl_type%" = 4) AND ("%type%" != 2)) BEGIN // innate
         PATCH_IF ("%type%" = 0) BEGIN
-          PATCH_PRINT "%SOURCE_FILE% issue: Known spell (%resref%.SPL) is an INNATE spell (was PRIEST)..."
+          PATCH_PRINT "HW15: %SOURCE_FILE% - Known spell (%resref%.SPL) is an INNATE spell (was PRIEST)..."
         END ELSE
         PATCH_IF ("%type%" = 1) BEGIN
-          PATCH_PRINT "%SOURCE_FILE% issue: Known spell (%resref%.SPL) is an INNATE spell (was MAGE)..."
+          PATCH_PRINT "HW16: %SOURCE_FILE% - Known spell (%resref%.SPL) is an INNATE spell (was MAGE)..."
         END ELSE
         BEGIN
-          PATCH_PRINT "%SOURCE_FILE% issue: Known spell (%resref%.SPL) is an INNATE spell (was %type%)..."
+          PATCH_PRINT "HW17: %SOURCE_FILE% - Known spell (%resref%.SPL) is an INNATE spell (was %type%)..."
         END
         WRITE_SHORT ("%known_off%" + 0x0a + ("%index%" * 0x0c)) 2
       END
@@ -57,11 +57,11 @@ PATCH_IF (known_off > 0x2d3) BEGIN
       SET level = %olevel% + 1
       PATCH_IF (("%level%" != "%spl_level%") AND ("%spl_level%" > 0) AND (("%spl_type%" = 1) OR ("%spl_type%" = 2))) BEGIN
         SET nlevel = %spl_level% - 1
-        PATCH_PRINT "%SOURCE_FILE% issue: Known spell (%resref%.SPL) has wrong level (%olevel%)! Should be %nlevel%..."
+        PATCH_PRINT "HW18: %SOURCE_FILE% - Known spell (%resref%.SPL) has wrong level (%olevel%)! Should be %nlevel%..."
         WRITE_SHORT ("%known_off%" + 0x08 + ("%index%" * 0x0c)) %nlevel%
       END
       PATCH_IF ("%olevel%" > 0) AND ("%spl_type%" = 4) BEGIN
-        PATCH_PRINT "%SOURCE_FILE% issue: Known spell (%resref%.SPL) is INNATE with non-zero level (%olevel%)! Setting to 0 to avoid crash..."
+        PATCH_PRINT "HE1: %SOURCE_FILE% - Known spell (%resref%.SPL) is INNATE with non-zero level (%olevel%)! Setting to 0 to avoid crash..."
         WRITE_SHORT ("%known_off%" + 0x08 + ("%index%" * 0x0c)) 0
       END
 
@@ -69,13 +69,13 @@ PATCH_IF (known_off > 0x2d3) BEGIN
       READ_SHORT ("%known_off%" + 0x08 + ("%index%" * 0x0c)) "olevel"
       SET nlevel = %olevel% + 1
       PATCH_IF ("%olevel%" > 6) AND ("%spl_type%" = 2) BEGIN
-        PATCH_PRINT "%SOURCE_FILE% issue: Spell level out of bounds (%resref%.SPL is a level %nlevel% PRIEST spell)! Removing to avoid crash..."
+        PATCH_PRINT "HE2: %SOURCE_FILE% - Spell level out of bounds (%resref%.SPL is a level %nlevel% PRIEST spell)! Removing to avoid crash..."
         REMOVE_KNOWN_SPELL ~%resref%~
         SET "index" = 0 - 1
         READ_LONG  0x2a4 "known_num"
       END ELSE
       PATCH_IF ("%olevel%" > 8) AND ("%spl_type%" = 1) BEGIN
-        PATCH_PRINT "%SOURCE_FILE% issue: Spell level out of bounds (%resref%.SPL is a level %nlevel% MAGE spell)! Removing to avoid crash..."
+        PATCH_PRINT "HE3: %SOURCE_FILE% - Spell level out of bounds (%resref%.SPL is a level %nlevel% MAGE spell)! Removing to avoid crash..."
         REMOVE_KNOWN_SPELL ~%resref%~
         SET "index" = 0 - 1
         READ_LONG  0x2a4 "known_num"
@@ -84,7 +84,7 @@ PATCH_IF (known_off > 0x2d3) BEGIN
 
     // Missing Known Spell Remover
     BEGIN
-      PATCH_PRINT "%SOURCE_FILE% issue: Known spell does not exist (%resref%.SPL)! Removing..."
+      PATCH_PRINT "HW16: %SOURCE_FILE% - Known spell does not exist (%resref%.SPL)! Removing..."
       REMOVE_KNOWN_SPELL ~%resref%~
       SET "index" = 0 - 1
       READ_LONG  0x2a4 "known_num"
@@ -104,7 +104,7 @@ PATCH_IF (mem_off > 0x2d3) BEGIN
       SET exists = 1
     END
     PATCH_IF ("%exists%" = 0) BEGIN
-      PATCH_PRINT "%SOURCE_FILE% issue: Memorized spell does not exist (%resref%.SPL)! Removing..."
+      PATCH_PRINT "HI17: %SOURCE_FILE% - Memorized spell does not exist (%resref%.SPL)! Removing..."
       REMOVE_MEMORIZED_SPELL ~%resref%~
       SET "index" = 0 - 1
       READ_LONG  0x2b4 "mem_num"

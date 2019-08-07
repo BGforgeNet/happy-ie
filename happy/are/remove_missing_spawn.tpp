@@ -14,7 +14,7 @@ PATCH_IF (spawn_off > 0x11b) BEGIN
           SET "exists" = 1
         END
         PATCH_IF ("%exists%" = 0) BEGIN
-          PATCH_PRINT "%SOURCE_FILE% issue: Spawn Point #%index% creature file does not exist (%resref%.cre)! Nulling..."
+          PATCH_PRINT "HI13: %SOURCE_FILE% - Spawn Point #%index% creature file does not exist (%resref%.cre)! Nulling..."
           WRITE_ASCII ("%spawn_off%" + 0x24 + ("%index2%" * 0x08) + ("%index%" * 0xc8)) ~NONE~ #8
         END
       END
@@ -27,7 +27,7 @@ PATCH_IF (spawn_off > 0x11b) BEGIN
       END
     END
     PATCH_IF ("%none_count%" = 10) BEGIN
-      PATCH_PRINT "%SOURCE_FILE% issue: Spawn Point #%index% has no creatures to spawn! Removing spawn entry..."
+      PATCH_PRINT "HI14 %SOURCE_FILE% - Spawn Point #%index% has no creatures to spawn! Removing spawn entry..."
       LPF fj_are_structure
         INT_VAR fj_delete_mode    = "%index%"
         STR_VAR fj_structure_type = spawn

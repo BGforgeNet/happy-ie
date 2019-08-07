@@ -32,10 +32,10 @@ COPY_EXISTING_REGEXP GLOB ~.*\.bcs$~ ~override~
           END
         END
       END ELSE BEGIN
-        PATCH_PRINT "%SOURCE_FILE%:  Modder chose I:Spell = 0, and it slipped through the cracks somehow."
+        PATCH_PRINT "HE9: %SOURCE_FILE% - Modder chose I:Spell = 0, and it slipped through the cracks somehow."
         TEXT_SPRINT z "BUGGED"
       END
-      PATCH_PRINT "%SOURCE_FILE% issue: Replacing SpellCastInnate(%MATCH1%,%MATCH2%) with SpellCastInnateRES('%z%',%MATCH1%)"
+      PATCH_PRINT "HE10: %SOURCE_FILE% - Replacing SpellCastInnate(%MATCH1%,%MATCH2%) with SpellCastInnateRES('%z%',%MATCH1%)"
     END
     ~SpellCastInnateRES("%z%",%MATCH1%)~
   END

@@ -18,12 +18,12 @@ PATCH_IF (("%scexists%" = 0) AND ("%exists%" = 1)) BEGIN
   SET "unassigned" = 1
 END
 PATCH_IF ("%unassigned%" = 1) BEGIN
-  PATCH_PRINT "%SOURCE_FILE% issue: Area Script (%SOURCE_RES%.bcs) assigned"
+  PATCH_PRINT "HI1: %SOURCE_FILE% - Area Script (%SOURCE_RES%.bcs) assigned"
   WRITE_ASCIIE 0x94 ~%SOURCE_RES%~ #8
 END ELSE
 PATCH_IF ("%missing%" = 1) BEGIN
   PATCH_IF NOT (("%script%" STR_EQ "NONE") OR ("%script%" STR_EQ "")) BEGIN
-    PATCH_PRINT "%SOURCE_FILE% issue: Missing area Script (%script%.bcs) created"
+    PATCH_PRINT "HI2: Missing area Script (%script%.bcs) created"
     INNER_ACTION BEGIN
       <<<<<<<< %script%.BAF
 >>>>>>>>
@@ -31,7 +31,7 @@ PATCH_IF ("%missing%" = 1) BEGIN
     END
   END ELSE
   BEGIN
-    PATCH_PRINT "%SOURCE_FILE% issue: Missing area Script (%SOURCE_RES%.bcs) created and assigned"
+    PATCH_PRINT "HI3: Missing area Script (%SOURCE_RES%.bcs) created and assigned"
     INNER_ACTION BEGIN
       <<<<<<<< %SOURCE_RES%.BAF
 >>>>>>>>

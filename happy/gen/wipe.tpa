@@ -24,7 +24,7 @@ ACTION_PHP_EACH filetype_size AS filetype => size BEGIN
   BUT_ONLY
   ACTION_PHP_EACH delete_from_override AS file => cnt BEGIN
     DELETE ~override/%SOURCE_FILE%~
-    PRINT ~%SOURCE_FILE% issue: invalid. Deleted from override~
+    PRINT ~HE5: %SOURCE_FILE% invalid. Deleted from override~
   END
   ACTION_CLEAR_ARRAY delete_from_override //for subsequent filetypes
 
@@ -43,7 +43,7 @@ ACTION_PHP_EACH filetype_size AS filetype => size BEGIN
   BUT_ONLY
   ACTION_PHP_EACH delete_from_key AS file => cnt BEGIN
     DISABLE_FROM_KEY %SOURCE_FILE%
-    PRINT ~%SOURCE_FILE% issue: invalid. Deregistered from chitin.key~
+    PRINT ~HE6: %SOURCE_FILE% invalid. Deregistered from chitin.key~
   END
   ACTION_CLEAR_ARRAY delete_from_key //for subsequent filetypes
 

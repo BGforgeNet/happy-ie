@@ -22,7 +22,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
             END
           END
           PATCH_IF ("%found%" = 0) BEGIN
-            PATCH_PRINT "%SOURCE_FILE% issue: Adding Cursed Portrait..."
+            PATCH_PRINT "HW173: %SOURCE_FILE% - Adding Cursed Portrait..."
             LPF ADD_ITEM_EQEFFECT
               INT_VAR
                 opcode     = 142
@@ -50,18 +50,18 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                 PATCH_IF ("%eff_opcode%" = 142) AND ("%eff_param2%" = 33) BEGIN
                   SET "found" = 1
                   PATCH_IF ("%eff_target%" != 1) BEGIN
-                    PATCH_PRINT "%SOURCE_FILE% issue: Bad Luck Portrait now displays on Self..."
+                    PATCH_PRINT "HW174: %SOURCE_FILE% - Bad Luck Portrait now displays on Self..."
                     WRITE_BYTE  ("%fx_off%" + 0x02 + ("%index1%" * 0x30)) 1
                   END
                   PATCH_IF ("%eff_timing%" != 2) BEGIN
-                    PATCH_PRINT "%SOURCE_FILE% issue: Bad Luck Portrait now displays while equipped..."
+                    PATCH_PRINT "HW175: %SOURCE_FILE% - Bad Luck Portrait now displays while equipped..."
                     WRITE_BYTE  ("%fx_off%" + 0x0c + ("%index1%" * 0x30)) 2
                   END
                 END
               END
             END
             PATCH_IF ("%found%" = 0) BEGIN
-              PATCH_PRINT "%SOURCE_FILE% issue: Adding Bad Luck Portrait..."
+              PATCH_PRINT "%SOURCE_FILE% - Adding Bad Luck Portrait..."
               LPF ADD_ITEM_EQEFFECT
                 INT_VAR
                   opcode     = 142
@@ -84,18 +84,18 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                 PATCH_IF ("%eff_opcode%" = 142) AND ("%eff_param2%" = 32) BEGIN
                   SET "found" = 1
                   PATCH_IF ("%eff_target%" != 1) BEGIN
-                    PATCH_PRINT "%SOURCE_FILE% issue: Good Luck Portrait now displays on Self..."
+                    PATCH_PRINT "HW176: %SOURCE_FILE% - Good Luck Portrait now displays on Self..."
                     WRITE_BYTE  ("%fx_off%" + 0x02 + ("%index1%" * 0x30)) 1
                   END
                   PATCH_IF ("%eff_timing%" != 2) BEGIN
-                    PATCH_PRINT "%SOURCE_FILE% issue: Good Luck Portrait now displays while equipped..."
+                    PATCH_PRINT "HW177: %SOURCE_FILE% - Good Luck Portrait now displays while equipped..."
                     WRITE_BYTE  ("%fx_off%" + 0x0c + ("%index1%" * 0x30)) 2
                   END
                 END
               END
             END
             PATCH_IF ("%found%" = 0) BEGIN
-              PATCH_PRINT "%SOURCE_FILE% issue: Adding Good Luck Portrait..."
+              PATCH_PRINT "HW178: %SOURCE_FILE% - Adding Good Luck Portrait..."
               LPF ADD_ITEM_EQEFFECT
                 INT_VAR
                   opcode     = 142
@@ -118,18 +118,18 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                 PATCH_IF ("%eff_opcode%" = 142) AND ("%eff_param2%" = 24) BEGIN
                   SET "found" = 1
                   PATCH_IF ("%eff_target%" != 1) BEGIN
-                    PATCH_PRINT "%SOURCE_FILE% issue: Protection from Acid Portrait now displays on Self..."
+                    PATCH_PRINT "HW179: %SOURCE_FILE% - Protection from Acid Portrait now displays on Self..."
                     WRITE_BYTE  ("%fx_off%" + 0x02 + ("%index1%" * 0x30)) 1
                   END
                   PATCH_IF ("%eff_timing%" != 2) BEGIN
-                    PATCH_PRINT "%SOURCE_FILE% issue: Protection from Acid Portrait now displays while equipped..."
+                    PATCH_PRINT "HW180: %SOURCE_FILE% - Protection from Acid Portrait now displays while equipped..."
                     WRITE_BYTE  ("%fx_off%" + 0x0c + ("%index1%" * 0x30)) 2
                   END
                 END
               END
             END
             PATCH_IF ("%found%" = 0) BEGIN
-              PATCH_PRINT "%SOURCE_FILE% issue: Adding Protection from Acid Portrait..."
+              PATCH_PRINT "HW181: %SOURCE_FILE% - Adding Protection from Acid Portrait..."
               LPF ADD_ITEM_EQEFFECT
                 INT_VAR
                   opcode     = 142
@@ -162,11 +162,11 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                   SET "foundfireicon" = 1
                   SET "fireiconindex" = "index1"
                   PATCH_IF ("%eff_target%" != 1) BEGIN
-                    PATCH_PRINT "%SOURCE_FILE% issue: Protection from Fire Portrait now displays on Self..."
+                    PATCH_PRINT "HW182: %SOURCE_FILE% - Protection from Fire Portrait now displays on Self..."
                     WRITE_BYTE  ("%fx_off%" + 0x02 + ("%index1%" * 0x30)) 1
                   END
                   PATCH_IF ("%eff_timing%" != 2) BEGIN
-                    PATCH_PRINT "%SOURCE_FILE% issue: Protection from Fire Portrait now displays while equipped..."
+                    PATCH_PRINT "HW183: %SOURCE_FILE% - Protection from Fire Portrait now displays while equipped..."
                     WRITE_BYTE  ("%fx_off%" + 0x0c + ("%index1%" * 0x30)) 2
                   END
                 END
@@ -174,22 +174,22 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                   SET "foundcoldicon" = 1
                   SET "coldiconindex" = "index1"
                   PATCH_IF ("%eff_target%" != 1) BEGIN
-                    PATCH_PRINT "%SOURCE_FILE% issue: Protection from Cold Portrait now displays on Self..."
+                    PATCH_PRINT "HW184: %SOURCE_FILE% - Protection from Cold Portrait now displays on Self..."
                     WRITE_BYTE  ("%fx_off%" + 0x02 + ("%index1%" * 0x30)) 1
                   END
                   PATCH_IF ("%eff_timing%" != 2) BEGIN
-                    PATCH_PRINT "%SOURCE_FILE% issue: Protection from Cold Portrait now displays while equipped..."
+                    PATCH_PRINT "HW185: %SOURCE_FILE% - Protection from Cold Portrait now displays while equipped..."
                     WRITE_BYTE  ("%fx_off%" + 0x0c + ("%index1%" * 0x30)) 2
                   END
                 END
                 PATCH_IF ("%eff_opcode%" = 142) AND ("%eff_param2%" = 26) BEGIN
                   SET "foundboth" = 1
                   PATCH_IF ("%eff_target%" != 1) BEGIN
-                    PATCH_PRINT "%SOURCE_FILE% issue: Resist Fire/Cold Portrait now displays on Self..."
+                    PATCH_PRINT "HW186: %SOURCE_FILE% - Resist Fire/Cold Portrait now displays on Self..."
                     WRITE_BYTE  ("%fx_off%" + 0x02 + ("%index1%" * 0x30)) 1
                   END
                   PATCH_IF ("%eff_timing%" != 2) BEGIN
-                    PATCH_PRINT "%SOURCE_FILE% issue: Resist Fire/Cold Portrait now displays while equipped..."
+                    PATCH_PRINT "HW187: %SOURCE_FILE% - Resist Fire/Cold Portrait now displays while equipped..."
                     WRITE_BYTE  ("%fx_off%" + 0x0c + ("%index1%" * 0x30)) 2
                   END
                 END
@@ -197,7 +197,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
             END
             PATCH_IF ("%foundboth%" = 0) AND ("%foundfireeffect%" = 1) BEGIN
               PATCH_IF ("%foundfireicon%" = 1) BEGIN
-                PATCH_PRINT "%SOURCE_FILE% issue: Removing Protection from Fire Portrait..."
+                PATCH_PRINT "HW188: %SOURCE_FILE% - Removing Protection from Fire Portrait..."
                 offset = "%fx_off%" + ("%fireiconindex%" * 0x30)
                 value  = 0x30
                 DELETE_BYTES offset value
@@ -221,7 +221,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                 WRITE_SHORT 0x70 %fx_num%
               END
               PATCH_IF ("%foundcoldicon%" = 1) BEGIN
-                PATCH_PRINT "%SOURCE_FILE% issue: Removing Protection from Cold Portrait..."
+                PATCH_PRINT "HW189: %SOURCE_FILE% - Removing Protection from Cold Portrait..."
                 offset = "%fx_off%" + ("%coldiconindex%" * 0x30)
                 value  = 0x30
                 DELETE_BYTES offset value
@@ -244,7 +244,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                 SET "fx_num" = "fx_num" - 1
                 WRITE_SHORT 0x70 %fx_num%
               END
-              PATCH_PRINT "%SOURCE_FILE% issue: Adding Resist Fire/Cold Portrait..."
+              PATCH_PRINT "HW190: %SOURCE_FILE% - Adding Resist Fire/Cold Portrait..."
               LPF ADD_ITEM_EQEFFECT
                 INT_VAR
                   opcode     = 142
@@ -255,7 +255,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
               READ_SHORT 0x70 "fx_num"
             END ELSE
             PATCH_IF ("%foundboth%" = 0) AND ("%foundcoldicon%" = 0) BEGIN
-              PATCH_PRINT "%SOURCE_FILE% issue: Adding Protection from Cold Portrait..."
+              PATCH_PRINT "HW191: %SOURCE_FILE% - Adding Protection from Cold Portrait..."
               LPF ADD_ITEM_EQEFFECT
                 INT_VAR
                   opcode     = 142
@@ -278,18 +278,18 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                 PATCH_IF ("%eff_opcode%" = 142) AND ("%eff_param2%" = 27) BEGIN
                   SET "found" = 1
                   PATCH_IF ("%eff_target%" != 1) BEGIN
-                    PATCH_PRINT "%SOURCE_FILE% issue: Protection from Electricity Portrait now displays on Self..."
+                    PATCH_PRINT "HW192: %SOURCE_FILE% - Protection from Electricity Portrait now displays on Self..."
                     WRITE_BYTE  ("%fx_off%" + 0x02 + ("%index1%" * 0x30)) 1
                   END
                   PATCH_IF ("%eff_timing%" != 2) BEGIN
-                    PATCH_PRINT "%SOURCE_FILE% issue: Protection from Electricity Portrait now displays while equipped..."
+                    PATCH_PRINT "HW193: %SOURCE_FILE% - Protection from Electricity Portrait now displays while equipped..."
                     WRITE_BYTE  ("%fx_off%" + 0x0c + ("%index1%" * 0x30)) 2
                   END
                 END
               END
             END
             PATCH_IF ("%found%" = 0) BEGIN
-              PATCH_PRINT "%SOURCE_FILE% issue: Adding Protection from Electricity Portrait..."
+              PATCH_PRINT "HW194: %SOURCE_FILE% - Adding Protection from Electricity Portrait..."
               LPF ADD_ITEM_EQEFFECT
                 INT_VAR
                   opcode     = 142
@@ -322,11 +322,11 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                   SET "foundfireicon" = 1
                   SET "fireiconindex" = "index1"
                   PATCH_IF ("%eff_target%" != 1) BEGIN
-                    PATCH_PRINT "%SOURCE_FILE% issue: Protection from Fire Portrait now displays on Self..."
+                    PATCH_PRINT "HW195: %SOURCE_FILE% - Protection from Fire Portrait now displays on Self..."
                     WRITE_BYTE  ("%fx_off%" + 0x02 + ("%index1%" * 0x30)) 1
                   END
                   PATCH_IF ("%eff_timing%" != 2) BEGIN
-                    PATCH_PRINT "%SOURCE_FILE% issue: Protection from Fire Portrait now displays while equipped..."
+                    PATCH_PRINT "HW196: %SOURCE_FILE% - Protection from Fire Portrait now displays while equipped..."
                     WRITE_BYTE  ("%fx_off%" + 0x0c + ("%index1%" * 0x30)) 2
                   END
                 END
@@ -334,22 +334,22 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                   SET "foundcoldicon" = 1
                   SET "coldiconindex" = "index1"
                   PATCH_IF ("%eff_target%" != 1) BEGIN
-                    PATCH_PRINT "%SOURCE_FILE% issue: Protection from Cold Portrait now displays on Self..."
+                    PATCH_PRINT "HW197: %SOURCE_FILE% - Protection from Cold Portrait now displays on Self..."
                     WRITE_BYTE  ("%fx_off%" + 0x02 + ("%index1%" * 0x30)) 1
                   END
                   PATCH_IF ("%eff_timing%" != 2) BEGIN
-                    PATCH_PRINT "%SOURCE_FILE% issue: Protection from Cold Portrait now displays while equipped..."
+                    PATCH_PRINT "HW198: %SOURCE_FILE% - Protection from Cold Portrait now displays while equipped..."
                     WRITE_BYTE  ("%fx_off%" + 0x0c + ("%index1%" * 0x30)) 2
                   END
                 END
                 PATCH_IF ("%eff_opcode%" = 142) AND ("%eff_param2%" = 26) BEGIN
                   SET "foundboth" = 1
                   PATCH_IF ("%eff_target%" != 1) BEGIN
-                    PATCH_PRINT "%SOURCE_FILE% issue: Resist Fire/Cold Portrait now displays on Self..."
+                    PATCH_PRINT "HW199: %SOURCE_FILE% - Resist Fire/Cold Portrait now displays on Self..."
                     WRITE_BYTE  ("%fx_off%" + 0x02 + ("%index1%" * 0x30)) 1
                   END
                   PATCH_IF ("%eff_timing%" != 2) BEGIN
-                    PATCH_PRINT "%SOURCE_FILE% issue: Resist Fire/Cold Portrait now displays while equipped..."
+                    PATCH_PRINT "HW200: %SOURCE_FILE% - Resist Fire/Cold Portrait now displays while equipped..."
                     WRITE_BYTE  ("%fx_off%" + 0x0c + ("%index1%" * 0x30)) 2
                   END
                 END
@@ -357,7 +357,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
             END
             PATCH_IF ("%foundboth%" = 0) AND ("%foundcoldeffect%" = 1) BEGIN
               PATCH_IF ("%foundfireicon%" = 1) BEGIN
-                PATCH_PRINT "%SOURCE_FILE% issue: Removing Protection from Fire Portrait..."
+                PATCH_PRINT "HW200: %SOURCE_FILE% - Removing Protection from Fire Portrait..."
                 offset = "%fx_off%" + ("%fireiconindex%" * 0x30)
                 value  = 0x30
                 DELETE_BYTES offset value
@@ -381,7 +381,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                 WRITE_SHORT 0x70 %fx_num%
               END
               PATCH_IF ("%foundcoldicon%" = 1) BEGIN
-                PATCH_PRINT "%SOURCE_FILE% issue: Removing Protection from Cold Portrait..."
+                PATCH_PRINT "HW201: %SOURCE_FILE% - Removing Protection from Cold Portrait..."
                 offset = "%fx_off%" + ("%coldiconindex%" * 0x30)
                 value  = 0x30
                 DELETE_BYTES offset value
@@ -404,7 +404,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                 SET "fx_num" = "fx_num" - 1
                 WRITE_SHORT 0x70 %fx_num%
               END
-              PATCH_PRINT "%SOURCE_FILE% issue: Adding Resist Fire/Cold Portrait..."
+              PATCH_PRINT "HW202: %SOURCE_FILE% - Adding Resist Fire/Cold Portrait..."
               LPF ADD_ITEM_EQEFFECT
                 INT_VAR
                   opcode     = 142
@@ -415,7 +415,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
               READ_SHORT 0x70 "fx_num"
             END ELSE
             PATCH_IF ("%foundboth%" = 0) AND ("%foundfireicon%" = 0) BEGIN
-              PATCH_PRINT "%SOURCE_FILE% issue: Adding Protection from Fire Portrait..."
+              PATCH_PRINT "HW203: %SOURCE_FILE% - Adding Protection from Fire Portrait..."
               LPF ADD_ITEM_EQEFFECT
                 INT_VAR
                   opcode     = 142
@@ -438,18 +438,18 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                 PATCH_IF ("%eff_opcode%" = 142) AND (("%eff_param2%" = 28) OR ("%eff_param2%" = 63)) BEGIN
                   SET "found" = 1
                   PATCH_IF ("%eff_target%" != 1) BEGIN
-                    PATCH_PRINT "%SOURCE_FILE% issue: Protection from Magic Portrait now displays on Self..."
+                    PATCH_PRINT "HW204: %SOURCE_FILE% - Protection from Magic Portrait now displays on Self..."
                     WRITE_BYTE  ("%fx_off%" + 0x02 + ("%index1%" * 0x30)) 1
                   END
                   PATCH_IF ("%eff_timing%" != 2) BEGIN
-                    PATCH_PRINT "%SOURCE_FILE% issue: Protection from Magic Portrait now displays while equipped..."
+                    PATCH_PRINT "HW205: %SOURCE_FILE% - Protection from Magic Portrait now displays while equipped..."
                     WRITE_BYTE  ("%fx_off%" + 0x0c + ("%index1%" * 0x30)) 2
                   END
                 END
               END
             END
             PATCH_IF ("%found%" = 0) BEGIN
-              PATCH_PRINT "%SOURCE_FILE% issue: Adding Protection from Magic Portrait..."
+              PATCH_PRINT "HW206: %SOURCE_FILE% - Adding Protection from Magic Portrait..."
               LPF ADD_ITEM_EQEFFECT
                 INT_VAR
                   opcode     = 142
@@ -472,18 +472,18 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                 PATCH_IF ("%eff_opcode%" = 142) AND ("%eff_param2%" = 103) BEGIN
                   SET "found" = 1
                   PATCH_IF ("%eff_target%" != 1) BEGIN
-                    PATCH_PRINT "%SOURCE_FILE% issue: Vocalize Portrait now displays on Self..."
+                    PATCH_PRINT "HW207: %SOURCE_FILE% - Vocalize Portrait now displays on Self..."
                     WRITE_BYTE  ("%fx_off%" + 0x02 + ("%index1%" * 0x30)) 1
                   END
                   PATCH_IF ("%eff_timing%" != 2) BEGIN
-                    PATCH_PRINT "%SOURCE_FILE% issue: Vocalize Portrait now displays while equipped..."
+                    PATCH_PRINT "HW208: %SOURCE_FILE% - Vocalize Portrait now displays while equipped..."
                     WRITE_BYTE  ("%fx_off%" + 0x0c + ("%index1%" * 0x30)) 2
                   END
                 END
               END
             END
             PATCH_IF ("%found%" = 0) BEGIN
-              PATCH_PRINT "%SOURCE_FILE% issue: Adding Vocalize Portrait..."
+              PATCH_PRINT "HW209: %SOURCE_FILE% - Adding Vocalize Portrait..."
               LPF ADD_ITEM_EQEFFECT
                 INT_VAR
                   opcode     = 142
@@ -506,18 +506,18 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                 PATCH_IF ("%eff_opcode%" = 142) AND ("%eff_param2%" = 114) BEGIN
                   SET "found" = 1
                   PATCH_IF ("%eff_target%" != 1) BEGIN
-                    PATCH_PRINT "%SOURCE_FILE% issue: Infravision Portrait now displays on Self..."
+                    PATCH_PRINT "HW210: %SOURCE_FILE% - Infravision Portrait now displays on Self..."
                     WRITE_BYTE  ("%fx_off%" + 0x02 + ("%index1%" * 0x30)) 1
                   END
                   PATCH_IF ("%eff_timing%" != 2) BEGIN
-                    PATCH_PRINT "%SOURCE_FILE% issue: Infravision Portrait now displays while equipped..."
+                    PATCH_PRINT "HW211: %SOURCE_FILE% - Infravision Portrait now displays while equipped..."
                     WRITE_BYTE  ("%fx_off%" + 0x0c + ("%index1%" * 0x30)) 2
                   END
                 END
               END
             END
             PATCH_IF ("%found%" = 0) BEGIN
-              PATCH_PRINT "%SOURCE_FILE% issue: Adding Infravision Portrait..."
+              PATCH_PRINT "HW212: %SOURCE_FILE% - Adding Infravision Portrait..."
               LPF ADD_ITEM_EQEFFECT
                 INT_VAR
                   opcode     = 142
@@ -540,18 +540,18 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                 PATCH_IF ("%eff_opcode%" = 142) AND ("%eff_param2%" = 31) BEGIN
                   SET "found" = 1
                   PATCH_IF ("%eff_target%" != 1) BEGIN
-                    PATCH_PRINT "%SOURCE_FILE% issue: Non-detection Portrait now displays on Self..."
+                    PATCH_PRINT "HW213: %SOURCE_FILE% - Non-detection Portrait now displays on Self..."
                     WRITE_BYTE  ("%fx_off%" + 0x02 + ("%index1%" * 0x30)) 1
                   END
                   PATCH_IF ("%eff_timing%" != 2) BEGIN
-                    PATCH_PRINT "%SOURCE_FILE% issue: Non-detection Portrait now displays while equipped..."
+                    PATCH_PRINT "HW214: %SOURCE_FILE% - Non-detection Portrait now displays while equipped..."
                     WRITE_BYTE  ("%fx_off%" + 0x0c + ("%index1%" * 0x30)) 2
                   END
                 END
               END
             END
             PATCH_IF ("%found%" = 0) BEGIN
-              PATCH_PRINT "%SOURCE_FILE% issue: Adding Non-detection Portrait..."
+              PATCH_PRINT "HW215: %SOURCE_FILE% - Adding Non-detection Portrait..."
               LPF ADD_ITEM_EQEFFECT
                 INT_VAR
                   opcode     = 142
@@ -574,18 +574,18 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                 PATCH_IF ("%eff_opcode%" = 142) AND (("%eff_param2%" = 42) OR ("%eff_param2%" = 56) OR ("%eff_param2%" = 87)) BEGIN
                   SET "found" = 1
                   PATCH_IF ("%eff_target%" != 1) BEGIN
-                    PATCH_PRINT "%SOURCE_FILE% issue: Regeneration Portrait now displays on Self..."
+                    PATCH_PRINT "HW216: %SOURCE_FILE% - Regeneration Portrait now displays on Self..."
                     WRITE_BYTE  ("%fx_off%" + 0x02 + ("%index1%" * 0x30)) 1
                   END
                   PATCH_IF ("%eff_timing%" != 2) BEGIN
-                    PATCH_PRINT "%SOURCE_FILE% issue: Regeneration Portrait now displays while equipped..."
+                    PATCH_PRINT "HW217: %SOURCE_FILE% - Regeneration Portrait now displays while equipped..."
                     WRITE_BYTE  ("%fx_off%" + 0x0c + ("%index1%" * 0x30)) 2
                   END
                 END
               END
             END
             PATCH_IF ("%found%" = 0) BEGIN
-              PATCH_PRINT "%SOURCE_FILE% issue: Adding Regeneration Portrait..."
+              PATCH_PRINT "HW218: %SOURCE_FILE% - Adding Regeneration Portrait..."
               LPF ADD_ITEM_EQEFFECT
                 INT_VAR
                   opcode     = 142
@@ -608,18 +608,18 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                 PATCH_IF ("%eff_opcode%" = 142) AND ("%eff_param2%" = 52) BEGIN
                   SET "found" = 1
                   PATCH_IF ("%eff_target%" != 1) BEGIN
-                    PATCH_PRINT "%SOURCE_FILE% issue: Mind Shield Portrait now displays on Self..."
+                    PATCH_PRINT "HW219: %SOURCE_FILE% - Mind Shield Portrait now displays on Self..."
                     WRITE_BYTE  ("%fx_off%" + 0x02 + ("%index1%" * 0x30)) 1
                   END
                   PATCH_IF ("%eff_timing%" != 2) BEGIN
-                    PATCH_PRINT "%SOURCE_FILE% issue: Mind Shield Portrait now displays while equipped..."
+                    PATCH_PRINT "HW220: %SOURCE_FILE% - Mind Shield Portrait now displays while equipped..."
                     WRITE_BYTE  ("%fx_off%" + 0x0c + ("%index1%" * 0x30)) 2
                   END
                 END
               END
             END
             PATCH_IF ("%found%" = 0) BEGIN
-              PATCH_PRINT "%SOURCE_FILE% issue: Adding Mind Shield Portrait..."
+              PATCH_PRINT "HW221: %SOURCE_FILE% - Adding Mind Shield Portrait..."
               LPF ADD_ITEM_EQEFFECT
                 INT_VAR
                   opcode     = 142
@@ -642,18 +642,18 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                 PATCH_IF ("%eff_opcode%" = 142) AND ("%eff_param2%" = 19) BEGIN
                   SET "found" = 1
                   PATCH_IF ("%eff_target%" != 1) BEGIN
-                    PATCH_PRINT "%SOURCE_FILE% issue: Free Action Portrait now displays on Self..."
+                    PATCH_PRINT "HW222: %SOURCE_FILE% - Free Action Portrait now displays on Self..."
                     WRITE_BYTE  ("%fx_off%" + 0x02 + ("%index1%" * 0x30)) 1
                   END
                   PATCH_IF ("%eff_timing%" != 2) BEGIN
-                    PATCH_PRINT "%SOURCE_FILE% issue: Free Action Portrait now displays while equipped..."
+                    PATCH_PRINT "HW223: %SOURCE_FILE% - Free Action Portrait now displays while equipped..."
                     WRITE_BYTE  ("%fx_off%" + 0x0c + ("%index1%" * 0x30)) 2
                   END
                 END
               END
             END
             PATCH_IF ("%found%" = 0) BEGIN
-              PATCH_PRINT "%SOURCE_FILE% issue: Adding Free Action Portrait..."
+              PATCH_PRINT "HW224: %SOURCE_FILE% - Adding Free Action Portrait..."
               LPF ADD_ITEM_EQEFFECT
                 INT_VAR
                   opcode     = 142
@@ -676,18 +676,18 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                 PATCH_IF ("%eff_opcode%" = 142) AND ("%eff_param2%" = 30) BEGIN
                   SET "found" = 1
                   PATCH_IF ("%eff_target%" != 1) BEGIN
-                    PATCH_PRINT "%SOURCE_FILE% issue: Protection from Poison Portrait now displays on Self..."
+                    PATCH_PRINT "HW225: %SOURCE_FILE% - Protection from Poison Portrait now displays on Self..."
                     WRITE_BYTE  ("%fx_off%" + 0x02 + ("%index1%" * 0x30)) 1
                   END
                   PATCH_IF ("%eff_timing%" != 2) BEGIN
-                    PATCH_PRINT "%SOURCE_FILE% issue: Protection from Poison Portrait now displays while equipped..."
+                    PATCH_PRINT "HW226: %SOURCE_FILE% - Protection from Poison Portrait now displays while equipped..."
                     WRITE_BYTE  ("%fx_off%" + 0x0c + ("%index1%" * 0x30)) 2
                   END
                 END
               END
             END
             PATCH_IF ("%found%" = 0) BEGIN
-              PATCH_PRINT "%SOURCE_FILE% issue: Adding Protection from Poison Portrait..."
+              PATCH_PRINT "HW227: %SOURCE_FILE% - Adding Protection from Poison Portrait..."
               LPF ADD_ITEM_EQEFFECT
                 INT_VAR
                   opcode     = 142
@@ -710,18 +710,18 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                 PATCH_IF ("%eff_opcode%" = 142) AND ("%eff_param2%" = 38) BEGIN
                   SET "found" = 1
                   PATCH_IF ("%eff_target%" != 1) BEGIN
-                    PATCH_PRINT "%SOURCE_FILE% issue: Haste Portrait now displays on Self..."
+                    PATCH_PRINT "HW228: %SOURCE_FILE% - Haste Portrait now displays on Self..."
                     WRITE_BYTE  ("%fx_off%" + 0x02 + ("%index1%" * 0x30)) 1
                   END
                   PATCH_IF ("%eff_timing%" != 2) BEGIN
-                    PATCH_PRINT "%SOURCE_FILE% issue: Haste Portrait now displays while equipped..."
+                    PATCH_PRINT "HW229: %SOURCE_FILE% - Haste Portrait now displays while equipped..."
                     WRITE_BYTE  ("%fx_off%" + 0x0c + ("%index1%" * 0x30)) 2
                   END
                 END
               END
             END
             PATCH_IF ("%found%" = 0) BEGIN
-              PATCH_PRINT "%SOURCE_FILE% issue: Adding Haste Portrait..."
+              PATCH_PRINT "HW230: %SOURCE_FILE% - Adding Haste Portrait..."
               LPF ADD_ITEM_EQEFFECT
                 INT_VAR
                   opcode     = 142

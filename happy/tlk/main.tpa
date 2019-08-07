@@ -7,7 +7,7 @@ COPY_EXISTING ~dialog.tlk~ ~dialog.tlk~
     READ_ASCII (cur_off+2) sound
     PATCH_IF ( (NOT ~%sound%~ STRING_EQUAL ~~) AND //not a null sound
                (NOT (FILE_EXISTS_IN_GAME ~%sound%.wav~ OR FILE_EXISTS ~sounds/%sound%.wav~)) ) BEGIN //doesn't exist in game or as a PC sound
-      PATCH_PRINT ~dialog.tlk issue: reference to non-existent sound %sound%. Nulling.~
+      PATCH_PRINT ~HW235: dialog.tlk - reference to a non-existent sound %sound%. Nulling.~
       WRITE_ASCII (cur_off+2) ~~ #8
     END
     cur_off = cur_off + 0x1a

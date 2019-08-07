@@ -14,7 +14,7 @@ PATCH_IF (fx_off > 0x71) BEGIN
               (opcode = 19) OR
               (opcode = 44) OR
               (opcode = 49)) AND (((param2 = 1) OR (param2 = 2)) AND (param1 = 0)) BEGIN
-      PATCH_PRINT "%SOURCE_FILE% issue: Stat Opcode (#%opcode%) setting to 0%! Incrementing by 1..."
+      PATCH_PRINT "HW125: %SOURCE_FILE% - Stat Opcode (#%opcode%) setting to 0%! Incrementing by 1..."
       WRITE_LONG  (fx_off + 0x04 + (index * 0x30)) 1
       WRITE_LONG  (fx_off + 0x08 + (index * 0x30)) 0
     END

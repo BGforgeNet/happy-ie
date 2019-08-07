@@ -8,7 +8,7 @@ PATCH_IF (fx_off > 0x71) BEGIN
     READ_SHORT ("%fx_off%" +        ("%index%" * 0x30)) "opcode"
     READ_BYTE  ("%fx_off%" + 0x02 + ("%index%" * 0x30)) "target"
     PATCH_IF ("%target%" = 2) BEGIN
-      PATCH_PRINT "%SOURCE_FILE% issue: Casting Effect #%index% (opcode %opcode%) targets preset target! Targetting self..."
+      PATCH_PRINT "HW233: %SOURCE_FILE% - Casting Effect #%index% (opcode %opcode%) targets preset target! Targetting self..."
       WRITE_BYTE  ("%fx_off%" + 0x02 + ("%index%" * 0x30)) 1
     END
   END

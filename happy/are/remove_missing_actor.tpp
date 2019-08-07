@@ -12,7 +12,7 @@ PATCH_IF (actor_off > 0x11b) BEGIN
         SET "exists" = 1
       END
       PATCH_IF (("%exists%" = 0) AND (("%flags%" BAND 0b00000001) = 0b00000001)) BEGIN
-        PATCH_PRINT "%SOURCE_FILE% issue: Actor #%index% does not exist (%resref%.cre)! Removing actor..."
+        PATCH_PRINT "HI10: %SOURCE_FILE% - Actor #%index% does not exist (%resref%.cre)! Removing actor..."
         LPF fj_are_structure
           INT_VAR fj_delete_mode    = "%index%"
           STR_VAR fj_structure_type = actor

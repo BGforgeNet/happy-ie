@@ -9,6 +9,6 @@ PATCH_IF (("%anim%" STR_EQ "BW") OR //bow
           ("%anim%" STR_EQ "S2") OR //2-handed sword
           ("%anim%" STR_EQ "SP")) AND //spear
          (("%flags%" BAND 0b00000010) = 0b00000000) BEGIN //2-handed
-  PATCH_PRINT "%SOURCE_FILE% issue: Item needs to be 2-handed (%anim% anim) to prevent crash!"
+  PATCH_PRINT "HE7: %SOURCE_FILE% issue: Item needs to be 2-handed (%anim% anim) to prevent crash!"
   WRITE_BYTE 0x18 ("%flags%" BOR 0b00000010)
 END

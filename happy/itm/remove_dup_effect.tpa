@@ -55,7 +55,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                      ("%dicsid%" = "%eff_dicsid%") AND
                      ("%savtyp%" = "%eff_savtyp%") AND
                      ("%savbon%" = "%eff_savbon%") BEGIN
-              PATCH_PRINT "%SOURCE_FILE% issue: Effect #%index1% (Opcode %opcode%) matches Effect #%index%! Removing..."
+              PATCH_PRINT "HI62: %SOURCE_FILE% - Effect #%index1% (Opcode %opcode%) matches Effect #%index%! Removing..."
               offset = "%fx_off%" + ("%index1%" * 0x30)
               value  = 0x30
               DELETE_BYTES offset value

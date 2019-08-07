@@ -26,7 +26,7 @@ PATCH_IF type != 0xb BEGIN //scroll
           READ_SHORT 0x8 frm_cnt
         END
         PATCH_IF frm_cnt < 2 BEGIN
-          PATCH_PRINT ~%real_src% (type %type%): inventory bam %inv_bam% has %frm_cnt% frames.~
+          PATCH_PRINT ~HW99: %real_src% (type %type%): inventory bam %inv_bam% has %frm_cnt% frames.~
         END
       BUT_ONLY
       OUTER_SPRINT SOURCE_FILE ~%real_src%~ //reset SOURCE_FILE for later PATCH_PRINT's

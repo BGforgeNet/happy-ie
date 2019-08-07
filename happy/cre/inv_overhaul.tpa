@@ -52,7 +52,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
                 SET "index3" = "index3" - 1
                 PATCH_IF ("%ref2%" = 0xffff) BEGIN
                   SET "slot" = "index3" - 20
-                  PATCH_PRINT ~%SOURCE_FILE% issue: Invalid HELM: %item%.itm! Moving to Inventory Slot #%slot%~
+                  PATCH_PRINT ~HW35: %SOURCE_FILE% - Invalid HELM: %item%.itm! Moving to Inventory Slot #%slot%~
                   WRITE_SHORT ("%slot_off%" + (0x02 * "%index%")) 0xffff
                   WRITE_SHORT ("%slot_off%" + (0x02 * "%index3%")) "ref"
                   WRITE_BYTE  ("%itm_off%" + 0x10 + (0x14 * "%ref%")) ("%cre_flags%" BOR 0b00000010)
@@ -60,7 +60,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
                   SET "index" = 0 - 1
                 END ELSE
                 BEGIN
-                  PATCH_PRINT ~%SOURCE_FILE% issue: Invalid HELM: %item%.itm! Cannot move because Inventory full!~
+                  PATCH_PRINT ~HW36: %SOURCE_FILE% - Invalid HELM: %item%.itm! Cannot move because Inventory full!~
                 END
               END
             END
@@ -74,7 +74,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
                 SET "index3" = "index3" - 1
                 PATCH_IF ("%ref2%" = 0xffff) BEGIN
                   SET "slot" = "index3" - 20
-                  PATCH_PRINT ~%SOURCE_FILE% issue: Invalid ARMOR: %item%.itm! Moving to Inventory Slot #%slot%~
+                  PATCH_PRINT ~HW37: %SOURCE_FILE% - Invalid ARMOR: %item%.itm! Moving to Inventory Slot #%slot%~
                   WRITE_SHORT ("%slot_off%" + (0x02 * "%index%")) 0xffff
                   WRITE_SHORT ("%slot_off%" + (0x02 * "%index3%")) "ref"
                   WRITE_BYTE  ("%itm_off%" + 0x10 + (0x14 * "%ref%")) ("%cre_flags%" BOR 0b00000010)
@@ -82,7 +82,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
                   SET "index" = 0 - 1
                 END ELSE
                 BEGIN
-                  PATCH_PRINT ~%SOURCE_FILE% issue: Invalid ARMOR: %item%.itm! Cannot move because Inventory full!~
+                  PATCH_PRINT ~HW39: %SOURCE_FILE% - Invalid ARMOR: %item%.itm! Cannot move because Inventory full!~
                 END
               END
             END
@@ -96,7 +96,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
                 SET "index3" = "index3" - 1
                 PATCH_IF ("%ref2%" = 0xffff) BEGIN
                   SET "slot" = "index3" - 20
-                  PATCH_PRINT ~%SOURCE_FILE% issue: 2-HANDED OFFHAND: %item%.itm! Moving to Inventory Slot #%slot%~
+                  PATCH_PRINT ~HW40: %SOURCE_FILE% - 2-HANDED OFFHAND: %item%.itm! Moving to Inventory Slot #%slot%~
                   WRITE_SHORT ("%slot_off%" + (0x02 * "%index%")) 0xffff
                   WRITE_SHORT ("%slot_off%" + (0x02 * "%index3%")) "ref"
                   WRITE_BYTE  ("%itm_off%" + 0x10 + (0x14 * "%ref%")) ("%cre_flags%" BOR 0b00000010)
@@ -104,7 +104,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
                   SET "index" = 0 - 1
                 END ELSE
                 BEGIN
-                  PATCH_PRINT ~%SOURCE_FILE% issue: 2-HANDED OFFHAND: %item%.itm! Cannot move because Inventory full!~
+                  PATCH_PRINT ~HW41: %SOURCE_FILE% - 2-HANDED OFFHAND: %item%.itm! Cannot move because Inventory full!~
                 END
               END ELSE
               PATCH_IF (("%type%" != 12) AND (("%flags%" BAND 0b00010100) = 0b00000100)) AND (("%cre_flags%" BAND 0b00001000) = 0b00000000) BEGIN // if not shield, check for valid melee abilities
@@ -127,7 +127,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
                   SET "index3" = "index3" - 1
                   PATCH_IF ("%ref2%" = 0xffff) BEGIN
                     SET "slot" = "index3" - 20
-                    PATCH_PRINT ~%SOURCE_FILE% issue: Invalid OFFHAND: %item%.itm! Moving to Inventory Slot #%slot%~
+                    PATCH_PRINT ~HW42: %SOURCE_FILE% - Invalid OFFHAND: %item%.itm! Moving to Inventory Slot #%slot%~
                     WRITE_SHORT ("%slot_off%" + (0x02 * "%index%")) 0xffff
                     WRITE_SHORT ("%slot_off%" + (0x02 * "%index3%")) "ref"
                     WRITE_BYTE  ("%itm_off%" + 0x10 + (0x14 * "%ref%")) ("%cre_flags%" BOR 0b00000010)
@@ -135,7 +135,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
                     SET "index" = 0 - 1
                   END ELSE
                   BEGIN
-                    PATCH_PRINT ~%SOURCE_FILE% issue: Invalid OFFHAND: %item%.itm! Cannot move because Inventory full!~
+                    PATCH_PRINT ~HW43: %SOURCE_FILE% - Invalid OFFHAND: %item%.itm! Cannot move because Inventory full!~
                   END
                 END
               END ELSE
@@ -200,7 +200,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
                   SET "index3" = "index3" - 1
                   PATCH_IF ("%ref2%" = 0xffff) BEGIN
                     SET "slot" = "index3" - 20
-                    PATCH_PRINT ~%SOURCE_FILE% issue: OFFHAND with 2-HAND: %item%.itm! Moving to Inventory Slot #%slot%~
+                    PATCH_PRINT ~%SOURCE_FILE% - OFFHAND with 2-HAND: %item%.itm! Moving to Inventory Slot #%slot%~
                     WRITE_SHORT ("%slot_off%" + (0x02 * "%index%")) 0xffff
                     WRITE_SHORT ("%slot_off%" + (0x02 * "%index3%")) "ref"
                     WRITE_BYTE  ("%itm_off%" + 0x10 + (0x14 * "%ref%")) ("%cre_flags%" BOR 0b00000010)
@@ -208,7 +208,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
                     SET "index" = 0 - 1
                   END ELSE
                   BEGIN
-                    PATCH_PRINT ~%SOURCE_FILE% issue: OFFHAND with 2-HAND: %item%.itm! Cannot move because Inventory full!~
+                    PATCH_PRINT ~HW44: %SOURCE_FILE% - OFFHAND with 2-HAND: %item%.itm! Cannot move because Inventory full!~
                   END
                 END
               END
@@ -223,7 +223,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
                 SET "index3" = "index3" - 1
                 PATCH_IF ("%ref2%" = 0xffff) BEGIN
                   SET "slot" = "index3" - 20
-                  PATCH_PRINT ~%SOURCE_FILE% issue: Invalid GLOVES: %item%.itm! Moving to Inventory Slot #%slot%~
+                  PATCH_PRINT ~HW45: %SOURCE_FILE% - Invalid GLOVES: %item%.itm! Moving to Inventory Slot #%slot%~
                   WRITE_SHORT ("%slot_off%" + (0x02 * "%index%")) 0xffff
                   WRITE_SHORT ("%slot_off%" + (0x02 * "%index3%")) "ref"
                   WRITE_BYTE  ("%itm_off%" + 0x10 + (0x14 * "%ref%")) ("%cre_flags%" BOR 0b00000010)
@@ -231,7 +231,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
                   SET "index" = 0 - 1
                 END ELSE
                 BEGIN
-                  PATCH_PRINT ~%SOURCE_FILE% issue: Invalid GLOVES: %item%.itm! Cannot move because Inventory full!~
+                  PATCH_PRINT ~HW46: %SOURCE_FILE% - Invalid GLOVES: %item%.itm! Cannot move because Inventory full!~
                 END
               END
             END
@@ -245,7 +245,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
                 SET "index3" = "index3" - 1
                 PATCH_IF ("%ref2%" = 0xffff) BEGIN
                   SET "slot" = "index3" - 20
-                  PATCH_PRINT ~%SOURCE_FILE% issue: Invalid LRING: %item%.itm! Moving to Inventory Slot #%slot%~
+                  PATCH_PRINT ~HW47: %SOURCE_FILE% - Invalid LRING: %item%.itm! Moving to Inventory Slot #%slot%~
                   WRITE_SHORT ("%slot_off%" + (0x02 * "%index%")) 0xffff
                   WRITE_SHORT ("%slot_off%" + (0x02 * "%index3%")) "ref"
                   WRITE_BYTE  ("%itm_off%" + 0x10 + (0x14 * "%ref%")) ("%cre_flags%" BOR 0b00000010)
@@ -253,7 +253,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
                   SET "index" = 0 - 1
                 END ELSE
                 BEGIN
-                  PATCH_PRINT ~%SOURCE_FILE% issue: Invalid LRING: %item%.itm! Cannot move because Inventory full!~
+                  PATCH_PRINT ~HW48: %SOURCE_FILE% - Invalid LRING: %item%.itm! Cannot move because Inventory full!~
                 END
               END
             END
@@ -267,7 +267,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
                 SET "index3" = "index3" - 1
                 PATCH_IF ("%ref2%" = 0xffff) BEGIN
                   SET "slot" = "index3" - 20
-                  PATCH_PRINT ~%SOURCE_FILE% issue: Invalid RRING: %item%.itm! Moving to Inventory Slot #%slot%~
+                  PATCH_PRINT ~HW49: %SOURCE_FILE% - Invalid RRING: %item%.itm! Moving to Inventory Slot #%slot%~
                   WRITE_SHORT ("%slot_off%" + (0x02 * "%index%")) 0xffff
                   WRITE_SHORT ("%slot_off%" + (0x02 * "%index3%")) "ref"
                   WRITE_BYTE  ("%itm_off%" + 0x10 + (0x14 * "%ref%")) ("%cre_flags%" BOR 0b00000010)
@@ -275,7 +275,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
                   SET "index" = 0 - 1
                 END ELSE
                 BEGIN
-                  PATCH_PRINT ~%SOURCE_FILE% issue: Invalid RRING: %item%.itm! Cannot move because Inventory full!~
+                  PATCH_PRINT ~HW50: %SOURCE_FILE% - Invalid RRING: %item%.itm! Cannot move because Inventory full!~
                 END
               END
             END
@@ -289,7 +289,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
                 SET "index3" = "index3" - 1
                 PATCH_IF ("%ref2%" = 0xffff) BEGIN
                   SET "slot" = "index3" - 20
-                  PATCH_PRINT ~%SOURCE_FILE% issue: Invalid AMULET: %item%.itm! Moving to Inventory Slot #%slot%~
+                  PATCH_PRINT ~HW51: %SOURCE_FILE% - Invalid AMULET: %item%.itm! Moving to Inventory Slot #%slot%~
                   WRITE_SHORT ("%slot_off%" + (0x02 * "%index%")) 0xffff
                   WRITE_SHORT ("%slot_off%" + (0x02 * "%index3%")) "ref"
                   WRITE_BYTE  ("%itm_off%" + 0x10 + (0x14 * "%ref%")) ("%cre_flags%" BOR 0b00000010)
@@ -297,7 +297,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
                   SET "index" = 0 - 1
                 END ELSE
                 BEGIN
-                  PATCH_PRINT ~%SOURCE_FILE% issue: Invalid AMULET: %item%.itm! Cannot move because Inventory full!~
+                  PATCH_PRINT ~HW52: %SOURCE_FILE% - Invalid AMULET: %item%.itm! Cannot move because Inventory full!~
                 END
               END
             END
@@ -311,7 +311,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
                 SET "index3" = "index3" - 1
                 PATCH_IF ("%ref2%" = 0xffff) BEGIN
                   SET "slot" = "index3" - 20
-                  PATCH_PRINT ~%SOURCE_FILE% issue: Invalid BELT: %item%.itm! Moving to Inventory Slot #%slot%~
+                  PATCH_PRINT ~HW53: %SOURCE_FILE% - Invalid BELT: %item%.itm! Moving to Inventory Slot #%slot%~
                   WRITE_SHORT ("%slot_off%" + (0x02 * "%index%")) 0xffff
                   WRITE_SHORT ("%slot_off%" + (0x02 * "%index3%")) "ref"
                   WRITE_BYTE  ("%itm_off%" + 0x10 + (0x14 * "%ref%")) ("%cre_flags%" BOR 0b00000010)
@@ -319,7 +319,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
                   SET "index" = 0 - 1
                 END ELSE
                 BEGIN
-                  PATCH_PRINT ~%SOURCE_FILE% issue: Invalid BELT: %item%.itm! Cannot move because Inventory full!~
+                  PATCH_PRINT ~HW54: %SOURCE_FILE% - Invalid BELT: %item%.itm! Cannot move because Inventory full!~
                 END
               END
             END
@@ -333,7 +333,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
                 SET "index3" = "index3" - 1
                 PATCH_IF ("%ref2%" = 0xffff) BEGIN
                   SET "slot" = "index3" - 20
-                  PATCH_PRINT ~%SOURCE_FILE% issue: Invalid BOOTS: %item%.itm! Moving to Inventory Slot #%slot%~
+                  PATCH_PRINT ~HW55: %SOURCE_FILE% - Invalid BOOTS: %item%.itm! Moving to Inventory Slot #%slot%~
                   WRITE_SHORT ("%slot_off%" + (0x02 * "%index%")) 0xffff
                   WRITE_SHORT ("%slot_off%" + (0x02 * "%index3%")) "ref"
                   WRITE_BYTE  ("%itm_off%" + 0x10 + (0x14 * "%ref%")) ("%cre_flags%" BOR 0b00000010)
@@ -341,7 +341,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
                   SET "index" = 0 - 1
                 END ELSE
                 BEGIN
-                  PATCH_PRINT ~%SOURCE_FILE% issue: Invalid BOOTS: %item%.itm! Cannot move because Inventory full!~
+                  PATCH_PRINT ~HW56: %SOURCE_FILE% - Invalid BOOTS: %item%.itm! Cannot move because Inventory full!~
                 END
               END
             END
@@ -370,7 +370,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
                 SET "index3" = "index3" - 1
                 PATCH_IF ("%ref2%" = 0xffff) BEGIN
                   SET "slot" = "index3" - 20
-                  PATCH_PRINT ~%SOURCE_FILE% issue: Invalid WEAPON1: %item%.itm! Moving to Inventory Slot #%slot%~
+                  PATCH_PRINT ~HW57: %SOURCE_FILE% - Invalid WEAPON1: %item%.itm! Moving to Inventory Slot #%slot%~
                   WRITE_SHORT ("%slot_off%" + (0x02 * "%index%")) 0xffff
                   WRITE_SHORT ("%slot_off%" + (0x02 * "%index3%")) "ref"
                   WRITE_BYTE  ("%itm_off%" + 0x10 + (0x14 * "%ref%")) ("%cre_flags%" BOR 0b00000010)
@@ -378,7 +378,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
                   SET "index" = 0 - 1
                 END ELSE
                 BEGIN
-                  PATCH_PRINT ~%SOURCE_FILE% issue: Invalid WEAPON1: %item%.itm! Cannot move because Inventory full!~
+                  PATCH_PRINT ~HW58: %SOURCE_FILE% - Invalid WEAPON1: %item%.itm! Cannot move because Inventory full!~
                 END
               END
             END
@@ -407,7 +407,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
                 SET "index3" = "index3" - 1
                 PATCH_IF ("%ref2%" = 0xffff) BEGIN
                   SET "slot" = "index3" - 20
-                  PATCH_PRINT ~%SOURCE_FILE% issue: Invalid WEAPON2: %item%.itm! Moving to Inventory Slot #%slot%~
+                  PATCH_PRINT ~HW59: %SOURCE_FILE% - Invalid WEAPON2: %item%.itm! Moving to Inventory Slot #%slot%~
                   WRITE_SHORT ("%slot_off%" + (0x02 * "%index%")) 0xffff
                   WRITE_SHORT ("%slot_off%" + (0x02 * "%index3%")) "ref"
                   WRITE_BYTE  ("%itm_off%" + 0x10 + (0x14 * "%ref%")) ("%cre_flags%" BOR 0b00000010)
@@ -415,7 +415,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
                   SET "index" = 0 - 1
                 END ELSE
                 BEGIN
-                  PATCH_PRINT ~%SOURCE_FILE% issue: Invalid WEAPON2: %item%.itm! Cannot move because Inventory full!~
+                  PATCH_PRINT ~HW60: %SOURCE_FILE% - Invalid WEAPON2: %item%.itm! Cannot move because Inventory full!~
                 END
               END
             END
@@ -444,7 +444,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
                 SET "index3" = "index3" - 1
                 PATCH_IF ("%ref2%" = 0xffff) BEGIN
                   SET "slot" = "index3" - 20
-                  PATCH_PRINT ~%SOURCE_FILE% issue: Invalid WEAPON3: %item%.itm! Moving to Inventory Slot #%slot%~
+                  PATCH_PRINT ~HW61: %SOURCE_FILE% - Invalid WEAPON3: %item%.itm! Moving to Inventory Slot #%slot%~
                   WRITE_SHORT ("%slot_off%" + (0x02 * "%index%")) 0xffff
                   WRITE_SHORT ("%slot_off%" + (0x02 * "%index3%")) "ref"
                   WRITE_BYTE  ("%itm_off%" + 0x10 + (0x14 * "%ref%")) ("%cre_flags%" BOR 0b00000010)
@@ -452,7 +452,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
                   SET "index" = 0 - 1
                 END ELSE
                 BEGIN
-                  PATCH_PRINT ~%SOURCE_FILE% issue: Invalid WEAPON3: %item%.itm! Cannot move because Inventory full!~
+                  PATCH_PRINT ~HW62: %SOURCE_FILE% - Invalid WEAPON3: %item%.itm! Cannot move because Inventory full!~
                 END
               END
             END
@@ -481,7 +481,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
                 SET "index3" = "index3" - 1
                 PATCH_IF ("%ref2%" = 0xffff) BEGIN
                   SET "slot" = "index3" - 20
-                  PATCH_PRINT ~%SOURCE_FILE% issue: Invalid WEAPON4: %item%.itm! Moving to Inventory Slot #%slot%~
+                  PATCH_PRINT ~HW63: %SOURCE_FILE% - Invalid WEAPON4: %item%.itm! Moving to Inventory Slot #%slot%~
                   WRITE_SHORT ("%slot_off%" + (0x02 * "%index%")) 0xffff
                   WRITE_SHORT ("%slot_off%" + (0x02 * "%index3%")) "ref"
                   WRITE_BYTE  ("%itm_off%" + 0x10 + (0x14 * "%ref%")) ("%cre_flags%" BOR 0b00000010)
@@ -489,7 +489,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
                   SET "index" = 0 - 1
                 END ELSE
                 BEGIN
-                  PATCH_PRINT ~%SOURCE_FILE% issue: Invalid WEAPON4: %item%.itm! Cannot move because Inventory full!~
+                  PATCH_PRINT ~HW64: %SOURCE_FILE% - Invalid WEAPON4: %item%.itm! Cannot move because Inventory full!~
                 END
               END
             END
@@ -503,7 +503,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
                 SET "index3" = "index3" - 1
                 PATCH_IF ("%ref2%" = 0xffff) BEGIN
                   SET "slot" = "index3" - 20
-                  PATCH_PRINT ~%SOURCE_FILE% issue: Invalid QUIVER1: %item%.itm! Moving to Inventory Slot #%slot%~
+                  PATCH_PRINT ~HW65: %SOURCE_FILE% - Invalid QUIVER1: %item%.itm! Moving to Inventory Slot #%slot%~
                   WRITE_SHORT ("%slot_off%" + (0x02 * "%index%")) 0xffff
                   WRITE_SHORT ("%slot_off%" + (0x02 * "%index3%")) "ref"
                   WRITE_BYTE  ("%itm_off%" + 0x10 + (0x14 * "%ref%")) ("%cre_flags%" BOR 0b00000010)
@@ -511,7 +511,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
                   SET "index" = 0 - 1
                 END ELSE
                 BEGIN
-                  PATCH_PRINT ~%SOURCE_FILE% issue: Invalid QUIVER1: %item%.itm! Cannot move because Inventory full!~
+                  PATCH_PRINT ~HW66: %SOURCE_FILE% - Invalid QUIVER1: %item%.itm! Cannot move because Inventory full!~
                 END
               END
             END
@@ -525,7 +525,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
                 SET "index3" = "index3" - 1
                 PATCH_IF ("%ref2%" = 0xffff) BEGIN
                   SET "slot" = "index3" - 20
-                  PATCH_PRINT ~%SOURCE_FILE% issue: Invalid QUIVER2: %item%.itm! Moving to Inventory Slot #%slot%~
+                  PATCH_PRINT ~HW67: %SOURCE_FILE% - Invalid QUIVER2: %item%.itm! Moving to Inventory Slot #%slot%~
                   WRITE_SHORT ("%slot_off%" + (0x02 * "%index%")) 0xffff
                   WRITE_SHORT ("%slot_off%" + (0x02 * "%index3%")) "ref"
                   WRITE_BYTE  ("%itm_off%" + 0x10 + (0x14 * "%ref%")) ("%cre_flags%" BOR 0b00000010)
@@ -533,7 +533,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
                   SET "index" = 0 - 1
                 END ELSE
                 BEGIN
-                  PATCH_PRINT ~%SOURCE_FILE% issue: Invalid QUIVER2: %item%.itm! Cannot move because Inventory full!~
+                  PATCH_PRINT ~HW68: %SOURCE_FILE% - Invalid QUIVER2: %item%.itm! Cannot move because Inventory full!~
                 END
               END
             END
@@ -547,7 +547,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
                 SET "index3" = "index3" - 1
                 PATCH_IF ("%ref2%" = 0xffff) BEGIN
                   SET "slot" = "index3" - 20
-                  PATCH_PRINT ~%SOURCE_FILE% issue: Invalid QUIVER3: %item%.itm! Moving to Inventory Slot #%slot%~
+                  PATCH_PRINT ~HW69: %SOURCE_FILE% - Invalid QUIVER3: %item%.itm! Moving to Inventory Slot #%slot%~
                   WRITE_SHORT ("%slot_off%" + (0x02 * "%index%")) 0xffff
                   WRITE_SHORT ("%slot_off%" + (0x02 * "%index3%")) "ref"
                   WRITE_BYTE  ("%itm_off%" + 0x10 + (0x14 * "%ref%")) ("%cre_flags%" BOR 0b00000010)
@@ -555,7 +555,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
                   SET "index" = 0 - 1
                 END ELSE
                 BEGIN
-                  PATCH_PRINT ~%SOURCE_FILE% issue: Invalid QUIVER3: %item%.itm! Cannot move because Inventory full!~
+                  PATCH_PRINT ~HW70: %SOURCE_FILE% - Invalid QUIVER3: %item%.itm! Cannot move because Inventory full!~
                 END
               END
             END
@@ -569,7 +569,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
                 SET "index3" = "index3" - 1
                 PATCH_IF ("%ref2%" = 0xffff) BEGIN
                   SET "slot" = "index3" - 20
-                  PATCH_PRINT ~%SOURCE_FILE% issue: Invalid QUIVER4: %item%.itm! Moving to Inventory Slot #%slot%~
+                  PATCH_PRINT ~HW71: %SOURCE_FILE% - Invalid QUIVER4: %item%.itm! Moving to Inventory Slot #%slot%~
                   WRITE_SHORT ("%slot_off%" + (0x02 * "%index%")) 0xffff
                   WRITE_SHORT ("%slot_off%" + (0x02 * "%index3%")) "ref"
                   WRITE_BYTE  ("%itm_off%" + 0x10 + (0x14 * "%ref%")) ("%cre_flags%" BOR 0b00000010)
@@ -577,7 +577,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
                   SET "index" = 0 - 1
                 END ELSE
                 BEGIN
-                  PATCH_PRINT ~%SOURCE_FILE% issue: Invalid QUIVER4: %item%.itm! Cannot move because Inventory full!~
+                  PATCH_PRINT ~HW72: %SOURCE_FILE% - Invalid QUIVER4: %item%.itm! Cannot move because Inventory full!~
                 END
               END
             END
@@ -591,7 +591,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
                 SET "index3" = "index3" - 1
                 PATCH_IF ("%ref2%" = 0xffff) BEGIN
                   SET "slot" = "index3" - 20
-                  PATCH_PRINT ~%SOURCE_FILE% issue: Invalid CLOAK: %item%.itm! Moving to Inventory Slot #%slot%~
+                  PATCH_PRINT ~HW73: %SOURCE_FILE% - Invalid CLOAK: %item%.itm! Moving to Inventory Slot #%slot%~
                   WRITE_SHORT ("%slot_off%" + (0x02 * "%index%")) 0xffff
                   WRITE_SHORT ("%slot_off%" + (0x02 * "%index3%")) "ref"
                   WRITE_BYTE  ("%itm_off%" + 0x10 + (0x14 * "%ref%")) ("%cre_flags%" BOR 0b00000010)
@@ -599,12 +599,12 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
                   SET "index" = 0 - 1
                 END ELSE
                 BEGIN
-                  PATCH_PRINT ~%SOURCE_FILE% issue: Invalid CLOAK: %item%.itm! Cannot move because Inventory full!~
+                  PATCH_PRINT ~HW74: %SOURCE_FILE% - Invalid CLOAK: %item%.itm! Cannot move because Inventory full!~
                 END
               END
             END
             PATCH_IF ((("%type%" =  2) AND ("%armor%" = 0)) AND (("%flags%" BAND 0b00010100) = 0b00000100)) AND ("%index%" > 17) BEGIN
-              PATCH_PRINT ~%SOURCE_FILE% issue: Equippable items in inventory: %item%.itm! Equipping ARMOR~
+              PATCH_PRINT ~HW75: %SOURCE_FILE% - Equippable items in inventory: %item%.itm! Equipping ARMOR~
               WRITE_SHORT ("%slot_off%" + (0x02 * "%index%")) 0xffff
               WRITE_SHORT ("%slot_off%" + (0x02))             "ref"
               SET "armor" = 1
@@ -612,7 +612,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
             PATCH_IF (((("%type%" =  5) OR
                         ("%type%" = 14) OR
                         ("%type%" = 31)) AND ("%quiver1%" = 0) AND (("%flags%" BAND 0b00010100) = 0b00000100)) AND ("%index%" > 17)) BEGIN
-              PATCH_PRINT ~%SOURCE_FILE% issue: Equippable items in inventory: %item%.itm! Equipping QUIVER1~
+              PATCH_PRINT ~%SOURCE_FILE% - Equippable items in inventory: %item%.itm! Equipping QUIVER1~
               WRITE_SHORT ("%slot_off%" + (0x02 * "%index%")) 0xffff
               WRITE_SHORT ("%slot_off%" + (0x02 * 13))        "ref"
               SET "quiver1" = 1
@@ -620,7 +620,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
             PATCH_IF (((("%type%" =  5) OR
                         ("%type%" = 14) OR
                         ("%type%" = 31)) AND ("%quiver2%" = 0) AND (("%flags%" BAND 0b00010100) = 0b00000100)) AND ("%index%" > 17)) BEGIN
-              PATCH_PRINT ~%SOURCE_FILE% issue: Equippable items in inventory: %item%.itm! Equipping QUIVER2~
+              PATCH_PRINT ~HW76: %SOURCE_FILE% - Equippable items in inventory: %item%.itm! Equipping QUIVER2~
               WRITE_SHORT ("%slot_off%" + (0x02 * "%index%")) 0xffff
               WRITE_SHORT ("%slot_off%" + (0x02 * 14))        "ref"
               WRITE_BYTE  ("%itm_off%" + 0x10 + (0x14 * "%ref%")) ("%cre_flags%" BOR 0b00000010)
@@ -629,7 +629,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
             PATCH_IF (((("%type%" =  5) OR
                         ("%type%" = 14) OR
                         ("%type%" = 31)) AND ("%quiver3%" = 0) AND (("%flags%" BAND 0b00010100) = 0b00000100)) AND ("%index%" > 17)) BEGIN
-              PATCH_PRINT ~%SOURCE_FILE% issue: Equippable items in inventory: %item%.itm! Equipping QUIVER3~
+              PATCH_PRINT ~HW77: %SOURCE_FILE% - Equippable items in inventory: %item%.itm! Equipping QUIVER3~
               WRITE_SHORT ("%slot_off%" + (0x02 * "%index%")) 0xffff
               WRITE_SHORT ("%slot_off%" + (0x02 * 15))        "ref"
               SET "quiver3" = 1
@@ -637,13 +637,13 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
             PATCH_IF (((("%type%" =  5) OR
                         ("%type%" = 14) OR
                         ("%type%" = 31)) AND ("%quiver4%" = 0)) AND (("%flags%" BAND 0b00010100) = 0b00000100) AND ("%index%" > 17)) BEGIN
-              PATCH_PRINT ~%SOURCE_FILE% issue: Equippable items in inventory: %item%.itm! Equipping QUIVER4~
+              PATCH_PRINT ~HW78: %SOURCE_FILE% - Equippable items in inventory: %item%.itm! Equipping QUIVER4~
               WRITE_SHORT ("%slot_off%" + (0x02 * "%index%")) 0xffff
               WRITE_SHORT ("%slot_off%" + (0x02 * 16))        "ref"
               SET "quiver4" = 1
             END ELSE
             PATCH_IF ((("%type%" =  7) AND ("%helm%" = 0)) AND (("%flags%" BAND 0b00010100) = 0b00000100)) AND ("%index%" > 17) BEGIN
-              PATCH_PRINT ~%SOURCE_FILE% issue: Equippable items in inventory: %item%.itm! Equipping HELM~
+              PATCH_PRINT ~HW79: %SOURCE_FILE% - Equippable items in inventory: %item%.itm! Equipping HELM~
               WRITE_SHORT ("%slot_off%" + (0x02 * "%index%")) 0xffff
               WRITE_SHORT ("%slot_off%")                      "ref"
               SET "helm" = 1
@@ -666,7 +666,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
                         ("%type%" = 30) OR // halberd
                         ("%type%" = 44)) AND ("%weapon1%" = 0) AND (("%flags%" BAND 0b00010100) = 0b00000100) AND ("%index%" > 17)))  BEGIN
               PATCH_IF ((("%flags%" BAND 0b00000010) != 0b00000010) AND ("%offhand%" = 0)) BEGIN
-                PATCH_PRINT ~%SOURCE_FILE% issue: Equippable items in inventory: %item%.itm! Equipping WEAPON1~
+                PATCH_PRINT ~HW80: %SOURCE_FILE% - Equippable items in inventory: %item%.itm! Equipping WEAPON1~
                 WRITE_SHORT ("%slot_off%" + (0x02 * "%index%")) 0xffff
                 WRITE_SHORT ("%slot_off%" + (0x02 * 9))         "ref"
                 SET "weapon1" = 1
@@ -690,7 +690,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
                         ("%type%" = 30) OR // halberd
                         ("%type%" = 44)) AND ("%weapon2%" = 0) AND (("%flags%" BAND 0b00010100) = 0b00000100) AND ("%index%" > 17)))  BEGIN
               PATCH_IF ((("%flags%" BAND 0b00000010) != 0b00000010) AND ("%offhand%" = 0)) BEGIN
-                PATCH_PRINT ~%SOURCE_FILE% issue: Equippable items in inventory: %item%.itm! Equipping WEAPON2~
+                PATCH_PRINT ~HW81: %SOURCE_FILE% - Equippable items in inventory: %item%.itm! Equipping WEAPON2~
                 WRITE_SHORT ("%slot_off%" + (0x02 * "%index%")) 0xffff
                 WRITE_SHORT ("%slot_off%" + (0x02 * 10))        "ref"
                 SET "weapon2" = 1
@@ -714,7 +714,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
                         ("%type%" = 30) OR // halberd
                         ("%type%" = 44)) AND ("%weapon3%" = 0) AND (("%flags%" BAND 0b00010100) = 0b00000100) AND ("%index%" > 17)))  BEGIN
               PATCH_IF ((("%flags%" BAND 0b00000010) != 0b00000010) AND ("%offhand%" = 0)) BEGIN
-                PATCH_PRINT ~%SOURCE_FILE% issue: Equippable items in inventory: %item%.itm! Equipping WEAPON3~
+                PATCH_PRINT ~HW82: %SOURCE_FILE% - Equippable items in inventory: %item%.itm! Equipping WEAPON3~
                 WRITE_SHORT ("%slot_off%" + (0x02 * "%index%")) 0xffff
                 WRITE_SHORT ("%slot_off%" + (0x02 * 11))        "ref"
                 SET "weapon3" = 1
@@ -738,14 +738,14 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
                         ("%type%" = 30) OR // halberd
                         ("%type%" = 44)) AND ("%weapon4%" = 0) AND (("%flags%" BAND 0b00010100) = 0b00000100) AND ("%index%" > 17)))  BEGIN
               PATCH_IF ((("%flags%" BAND 0b00000010) != 0b00000010) AND ("%offhand%" = 0)) BEGIN
-                PATCH_PRINT ~%SOURCE_FILE% issue: Equippable items in inventory: %item%.itm! Equipping WEAPON4~
+                PATCH_PRINT ~HW83: %SOURCE_FILE% - Equippable items in inventory: %item%.itm! Equipping WEAPON4~
                 WRITE_SHORT ("%slot_off%" + (0x02 * "%index%")) 0xffff
                 WRITE_SHORT ("%slot_off%" + (0x02 * 12))        "ref"
                 SET "weapon4" = 1
               END
             END ELSE
             PATCH_IF ((("%type%" = 12) AND ("%offhand%" = 0) AND ("2handedequip" = 0)) AND (("%flags%" BAND 0b00010100) = 0b00000100)) AND ("%index%" > 17) BEGIN
-              PATCH_PRINT ~%SOURCE_FILE% issue: Equippable items in inventory: %item%.itm! Equipping SHIELD~
+              PATCH_PRINT ~HW84: %SOURCE_FILE% - Equippable items in inventory: %item%.itm! Equipping SHIELD~
               WRITE_SHORT ("%slot_off%" + (0x02 * "%index%")) 0xffff
               WRITE_SHORT ("%slot_off%" + (0x02 * 2))         "ref"
               SET "offhand" = 1
@@ -783,7 +783,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
         PATCH_IF ((weapon_present = 0) AND NOT (item_index = 0xffff)) BEGIN //there's a weapon, but it's not selected
           weapon_present = 1
           weapon_present_slot = inv_slot - 9
-          PATCH_PRINT ~%SOURCE_FILE% issue: equipped weapon not selected! Selecting WEAPON%weapon_present_slot%~
+          PATCH_PRINT ~HW85: %SOURCE_FILE% - equipped weapon not selected! Selecting WEAPON%weapon_present_slot%~
           WRITE_LONG (slot_off+38*0x2) weapon_present_slot
           weapon_selected = 1
         END
@@ -791,7 +791,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
     END
     PATCH_IF ((weapon_selected = 0) AND (selected_weapon_slot != 1000)) BEGIN //still no weapon
       WRITE_LONG (slot_off+38*0x2) 1000
-      PATCH_PRINT ~%SOURCE_FILE% issue: no weapons available. Selecting FIST~
+      PATCH_PRINT ~HI23: %SOURCE_FILE% - no weapons available. Selecting FIST~
     END
 
   END

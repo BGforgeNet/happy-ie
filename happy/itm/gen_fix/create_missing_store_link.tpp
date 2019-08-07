@@ -3,7 +3,7 @@ READ_SHORT 0x1c "type"
 
 PATCH_IF ("%type%" = 36) BEGIN
   PATCH_IF NOT (FILE_EXISTS_IN_GAME ~%SOURCE_RES%.sto~) BEGIN
-    PATCH_PRINT "%SOURCE_FILE% issue: Container missing corresponding STO file! Linking makeshift store..."
+    PATCH_PRINT "HW100: %SOURCE_FILE% - Container missing corresponding STO file! Linking makeshift store..."
     INNER_ACTION BEGIN
 
       ACTION_DEFINE_ASSOCIATIVE_ARRAY lol_stores BEGIN

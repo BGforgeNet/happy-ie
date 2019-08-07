@@ -40,7 +40,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
     PATCH_IF VARIABLE_IS_SET $opcode_with_res(~%opcode%~) BEGIN
       SPRINT ext $opcode_with_res(~%opcode%~)
       PATCH_IF NOT FILE_EXISTS_IN_GAME ~%resref%.%ext%~ BEGIN
-        PATCH_PRINT ~%SOURCE_FILE% issue: effect with opcode %opcode% refers to a missing resource %resref%.%ext%~
+        PATCH_PRINT ~HW231: %SOURCE_FILE% - effect with opcode %opcode% refers to a missing resource %resref%.%ext%~
       END
     END
   END

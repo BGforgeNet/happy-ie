@@ -23,7 +23,7 @@ PATCH_IF (abil_off > 0x71) BEGIN
       END
       PATCH_IF ("%fx_idx%" > "%abil_fx_idx%") BEGIN
         SET "fx_idx" = "fx_idx" - "abil_fx_num"
-        PATCH_PRINT "%SOURCE_FILE% issue: Writing new FX IDX = %fx_idx%!"
+        PATCH_PRINT "HW101: %SOURCE_FILE% - Writing new FX IDX = %fx_idx%!"
         WRITE_SHORT 0x6e "fx_idx"
       END
       FOR (index1 = 0; index1 < abil_num; index1 = index1 + 1) BEGIN
@@ -31,7 +31,7 @@ PATCH_IF (abil_off > 0x71) BEGIN
           READ_SHORT ("%abil_off%" + 0x20 + (0x38 * "%index1%")) "abil_fx_idx1"
           PATCH_IF ("%abil_fx_idx1%" > "%abil_fx_idx%") BEGIN
             SET "abil_fx_idx1" = "abil_fx_idx1" - "abil_fx_num"
-            PATCH_PRINT "%SOURCE_FILE% issue: Writing new ABIL #%index1% FX IDX = %abil_fx_idx1%!"
+            PATCH_PRINT "HW102: %SOURCE_FILE% - Writing new ABIL #%index1% FX IDX = %abil_fx_idx1%!"
             WRITE_SHORT ("%abil_off%" + 0x20 + (0x38 * "%index1%")) "abil_fx_idx1"
           END
         END
@@ -40,7 +40,7 @@ PATCH_IF (abil_off > 0x71) BEGIN
       value  = 0x38
       DELETE_BYTES offset value
       SOURCE_SIZE = SOURCE_SIZE - value
-      PATCH_PRINT "%SOURCE_FILE% issue: Ability #%index% is invalid! Deleting Ability #%index%..."
+      PATCH_PRINT "HW103: %SOURCE_FILE% - Ability #%index% is invalid! Deleting Ability #%index%..."
       SET "index" = 0 - 1
       SET "abil_num" = "abil_num" - 1
       WRITE_SHORT 0x68 "abil_num"

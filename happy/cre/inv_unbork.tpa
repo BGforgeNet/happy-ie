@@ -9,7 +9,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
         READ_SHORT ("%slot_off%" + (0x02 * "%index%")) "ref" ELSE 0xffff
         PATCH_IF ("%ref%" != 0xffff) BEGIN
           PATCH_IF ((%ref% + 1) > %itm_num%) BEGIN
-            PATCH_PRINT "%SOURCE_FILE% issue: Inventory Item Slot #%index% refers to an item outside the Item Table! Setting to -1..."
+            PATCH_PRINT "HI24: %SOURCE_FILE% - Inventory Item Slot #%index% refers to an item outside the Item Table! Setting to -1..."
             WRITE_SHORT ("%slot_off%" + (0x02 * "%index%")) 0xffff
           END
         END
@@ -39,7 +39,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
             END
           END
           PATCH_IF %critical% = 1 BEGIN
-            PATCH_PRINT "%SOURCE_FILE% issue: Inventory Item #%index% (%item%.ITM) is not actually in inventory! Potentially quest-breaking item! Removing..."
+            PATCH_PRINT "HE4: %SOURCE_FILE% - Inventory Item #%index% (%item%.ITM) is not actually in inventory! Potentially quest-breaking item! Removing..."
             REMOVE_CRE_ITEM ~%item%~
             SET "index" = 0 - 1
             READ_LONG  0x2b8 "slot_off" ELSE 0
@@ -54,7 +54,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
               END
             END
             PATCH_IF ("%foundslot%" > 0) BEGIN
-              PATCH_PRINT "%SOURCE_FILE% issue: Inventory Item #%index% (%item%.ITM) is not actually in inventory! Adding to Inventory Slot #%foundslot%..."
+              PATCH_PRINT "HW86: %SOURCE_FILE% - Inventory Item #%index% (%item%.ITM) is not actually in inventory! Adding to Inventory Slot #%foundslot%..."
               WRITE_SHORT ("%slot_off%" + (0x02 * "%foundslot%")) "index"
             END ELSE
             BEGIN
@@ -64,7 +64,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
                   SET "foundslot" = "index1"
                 END
               END
-              PATCH_PRINT "%SOURCE_FILE% issue: Inventory Item #%index% (%item%.ITM) is not actually in inventory! No free inventory slot found! Adding to Slot #%foundslot%..."
+              PATCH_PRINT "HW87: %SOURCE_FILE% - Inventory Item #%index% (%item%.ITM) is not actually in inventory! No free inventory slot found! Adding to Slot #%foundslot%..."
               WRITE_SHORT ("%slot_off%" + (0x02 * "%foundslot%")) "index"
             END
           END

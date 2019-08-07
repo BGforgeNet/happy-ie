@@ -16,7 +16,7 @@ PATCH_IF name_len > 1 BEGIN
 //  (~%name%~ STRING_MATCHES_REGEXP ~^.*\r$~) = 0 OR
 //  (~%name%~ STRING_MATCHES_REGEXP ~^.*\n$~) = 0
   BEGIN
-    PATCH_PRINT ~%SOURCE_FILE% issue: name ends with CRLF. Fixed.~
+    PATCH_PRINT ~HW128: %SOURCE_FILE% - name ends with CRLF. Fixed.~
     INNER_PATCH_SAVE new_name ~%name%~ BEGIN
       DELETE_BYTES (name_len - 1) 1
     END
@@ -30,7 +30,7 @@ PATCH_IF uname_len > 1 BEGIN
   END
   PATCH_IF last_char = 0xa OR last_char = 0xd
   BEGIN
-    PATCH_PRINT ~%SOURCE_FILE% issue: uname ends with CRLF. Fixed.~
+    PATCH_PRINT ~HW129: %SOURCE_FILE% issue: uname ends with CRLF. Fixed.~
     INNER_PATCH_SAVE new_uname ~%uname%~ BEGIN
       DELETE_BYTES (uname_len - 1) 1
     END

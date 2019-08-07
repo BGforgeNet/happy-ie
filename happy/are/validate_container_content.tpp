@@ -16,7 +16,7 @@ PATCH_IF (cont_off > 0x11b) BEGIN
     READ_LONG  ("%cont_off%" + 0x44 + (0xc0 * "%index%")) "cont_itm_num"
     PATCH_IF ("%bound_a%" = 0) AND ("%bound_b%" = 0) AND ("%bound_c%" = 0) AND ("%bound_d%" = 0) AND ("%cont_type%" != 4) AND ("%cont_itm_num%" > 0) BEGIN
       WRITE_SHORT ("%cont_off%" + 0x24 + (0xc0 * "%index%")) 4
-      PATCH_PRINT "%SOURCE_FILE% issue: Container #%index% has no bounding box but contains items! Dropping all items to ground..."
+      PATCH_PRINT "HW4: %SOURCE_FILE% - Container #%index% has no bounding box but contains items! Dropping all items to ground..."
     END
 
     // Invalid container content checker
@@ -34,11 +34,11 @@ PATCH_IF (cont_off > 0x11b) BEGIN
           PATCH_IF ("%resref%" STR_EQ "%tutu_itm%") AND (FILE_EXISTS_IN_GAME "%bgt_itm%.itm") BEGIN
             WRITE_ASCIIE ("%itm_off%" + (("%index2%" + "%cont_itm_idx%") * 0x14)) "%bgt_itm%" #8
             SET "converted" = 1
-            PATCH_PRINT "%SOURCE_FILE% issue: Container #%index% Item #%index2% had Tutu item! (%resref% -> %bgt_itm%)!"
+            PATCH_PRINT "HW5: %SOURCE_FILE% - Container #%index% Item #%index2% had Tutu item! (%resref% -> %bgt_itm%)!"
           END
         END
         PATCH_IF ("%converted%" = 0) BEGIN
-          PATCH_PRINT "%SOURCE_FILE% issue: Container #%index% Item #%index2% does not exist (%resref%.itm)! Removing Item #%index2%..."
+          PATCH_PRINT "HI15: %SOURCE_FILE% - Container #%index% Item #%index2% does not exist (%resref%.itm)! Removing Item #%index2%..."
           LPF  ~fj_are_structure~
             INT_VAR fj_delete_mode    = "%index2%" + "%cont_itm_idx%"
             STR_VAR fj_structure_type = ~itm~

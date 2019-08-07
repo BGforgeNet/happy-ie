@@ -12,7 +12,7 @@ PATCH_IF (amb_off > 0x11b) BEGIN
           SET "exists" = 1
         END
         PATCH_IF ("%exists%" = 0) BEGIN
-          PATCH_PRINT "%SOURCE_FILE% issue: Ambient #%index% does not exist (%resref%.wav)! Nulling..."
+          PATCH_PRINT "HI11: %SOURCE_FILE% - Ambient #%index% does not exist (%resref%.wav)! Nulling..."
           WRITE_ASCII ("%amb_off%" + 0x30 + ("%index2%" * 0x08) + (0xd4 * "%index%")) ~NONE~ #8
         END
       END

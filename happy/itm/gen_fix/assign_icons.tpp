@@ -19,16 +19,16 @@ END
 
 PATCH_IF ("%inv_exists%" = 0) BEGIN
   PATCH_IF ("%inv_icon%" STR_EQ "none") OR ("%inv_icon%" STR_EQ "") BEGIN
-    PATCH_PRINT "%SOURCE_FILE% issue: Unassigned Inventory Icon! Assigning placeholder icon..."
+    PATCH_PRINT "HW90: %SOURCE_FILE% - Unassigned Inventory Icon! Assigning placeholder icon..."
   END ELSE
   BEGIN
-    PATCH_PRINT "%SOURCE_FILE% issue: Non-existent Inventory Icon (%inv_icon%.BAM)! Assigning placeholder icon..."
+    PATCH_PRINT "HW91: %SOURCE_FILE% - Non-existent Inventory Icon (%inv_icon%.BAM)! Assigning placeholder icon..."
   END
   WRITE_ASCII 0x3a ~IMISC6V~ #8
 END
 PATCH_IF ("%gnd_exists%" = 0) BEGIN
   PATCH_IF ("%gnd_icon%" STR_EQ "GCLCKC01") BEGIN
-    PATCH_PRINT "%SOURCE_FILE% issue: Non-existent Ground Icon (%gnd_icon%.BAM)! Assigning GCLCK01.BAM..."
+    PATCH_PRINT "HW92: %SOURCE_FILE% - Non-existent Ground Icon (%gnd_icon%.BAM)! Assigning GCLCK01.BAM..."
     WRITE_ASCII 0x44 ~GCLCK01~ #8
   END ELSE
   PATCH_IF ("%gnd_icon%" STR_EQ "_GPOTN01") OR
@@ -37,28 +37,28 @@ PATCH_IF ("%gnd_exists%" = 0) BEGIN
            ("%gnd_icon%" STR_EQ "PTION2KG") OR
            ("%gnd_icon%" STR_EQ "PTION2LG") OR
            ("%gnd_icon%" STR_EQ "PTION2MG") BEGIN
-    PATCH_PRINT "%SOURCE_FILE% issue: Non-existent Ground Icon (%gnd_icon%.BAM)! Assigning GPOTN01.BAM..."
+    PATCH_PRINT "HW93: %SOURCE_FILE% - Non-existent Ground Icon (%gnd_icon%.BAM)! Assigning GPOTN01.BAM..."
     WRITE_ASCII 0x44 ~GPOTN01~ #8
   END ELSE
   PATCH_IF ("%gnd_icon%" STR_EQ "ICRATE01") BEGIN
-    PATCH_PRINT "%SOURCE_FILE% issue: Non-existent Ground Icon (%gnd_icon%.BAM)! Assigning GCRATE01.BAM..."
+    PATCH_PRINT "HW94: %SOURCE_FILE% - Non-existent Ground Icon (%gnd_icon%.BAM)! Assigning GCRATE01.BAM..."
     WRITE_ASCII 0x44 ~GCRATE01~ #8
   END ELSE
   PATCH_IF ("%gnd_icon%" STR_EQ "none") OR ("%gnd_icon%" STR_EQ "") BEGIN
-    PATCH_PRINT "%SOURCE_FILE% issue: Unassigned Ground Icon! Assigning placeholder icon..."
+    PATCH_PRINT "HW95: %SOURCE_FILE% - Unassigned Ground Icon! Assigning placeholder icon..."
     WRITE_ASCII 0x44 ~GCRATE01~ #8
   END ELSE
   BEGIN
-    PATCH_PRINT "%SOURCE_FILE% issue: Non-existent Ground Icon (%gnd_icon%.BAM)! Assigning placeholder icon..."
+    PATCH_PRINT "HW96: %SOURCE_FILE% - Non-existent Ground Icon (%gnd_icon%.BAM)! Assigning placeholder icon..."
     WRITE_ASCII 0x44 ~GCRATE01~ #8
   END
 END
 PATCH_IF ("%desc_exists%" = 0) BEGIN
   PATCH_IF ("%desc_icon%" STR_EQ "none") OR ("%desc_icon%" STR_EQ "") BEGIN
-    PATCH_PRINT "%SOURCE_FILE% issue: Unassigned Description Icon! Assigning placeholder icon..."
+    PATCH_PRINT "HW97: %SOURCE_FILE% - Unassigned Description Icon! Assigning placeholder icon..."
   END ELSE
   BEGIN
-    PATCH_PRINT "%SOURCE_FILE% issue: Non-existent Description Icon (%desc_icon%.BAM)! Assigning placeholder icon..."
+    PATCH_PRINT "HW98: %SOURCE_FILE% - Non-existent Description Icon (%desc_icon%.BAM)! Assigning placeholder icon..."
   END
   WRITE_ASCII 0x58 ~CMISC6V~ #8
 END

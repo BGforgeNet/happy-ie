@@ -11,7 +11,7 @@ PHP_EACH h_array AS int => h_off BEGIN
     END
 */
     PATCH_IF charge_behavior = 3 BEGIN
-      PATCH_PRINT ~%SOURCE_FILE% issue: melee header %int% recharges daily. Changed to 1 (vanish).~
+      PATCH_PRINT ~HW126: %SOURCE_FILE% issue: melee header %int% recharges daily. Changed to 1 (vanish).~
       WRITE_SHORT (h_off + 0x24) 1
     END
   END

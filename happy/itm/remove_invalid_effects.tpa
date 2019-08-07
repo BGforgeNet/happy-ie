@@ -30,12 +30,12 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
       READ_LONG (fx_off+0x8) parameter2
       PATCH_IF (opcode = 12 AND (VARIABLE_IS_SET $dtype(~%parameter2%~))) BEGIN
         SPRINT dtype_string $dtype(~%parameter2%~)
-        PATCH_PRINT ~%SOURCE_FILE% issue: damage of type %dtype_string%. Removing.~
+        PATCH_PRINT ~HE8: %SOURCE_FILE% - damage of type %dtype_string%. Removing.~
         LPF G_DELETE_ITEM_EFFECT  INT_VAR opcode = %opcode% check_globals = 1 parameter2 = %parameter2%  END
       END
       PATCH_IF (VARIABLE_IS_SET $rtype(~%opcode%~)) BEGIN
         SPRINT rtype_string $rtype(~%opcode%~)
-        PATCH_PRINT ~%SOURCE_FILE% issue: an effect adds resistance to nonexistent damage type %rtype_string%. Removing.~
+        PATCH_PRINT ~HI63: %SOURCE_FILE% - an effect adds resistance to nonexistent damage type %rtype_string%. Removing.~
         LPF G_DELETE_ITEM_EFFECT  INT_VAR opcode = %opcode% check_globals = 1  END
         size -= 1
       END
@@ -92,7 +92,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
     PATCH_IF VARIABLE_IS_SET $opcode_with_res(~%opcode%~) BEGIN
       SPRINT ext $opcode_with_res(~%opcode%~)
       PATCH_IF NOT FILE_EXISTS_IN_GAME ~%resref%.%ext%~ BEGIN
-        PATCH_PRINT ~%SOURCE_FILE% issue: effect with opcode %opcode% refers to a non-existent resource %resref%.%ext%. Removing.~
+        PATCH_PRINT ~HW232: %SOURCE_FILE% - effect with opcode %opcode% refers to a non-existent resource %resref%.%ext%. Removing.~
         SET $delete_opcode(~%i%~) = opcode
         SPRINT $delete_resref(~%i%~) ~%resref%~
         i = i + 1

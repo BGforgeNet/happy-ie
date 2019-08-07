@@ -12,7 +12,7 @@ PATCH_IF (rest_off > 0x11b) BEGIN
         SET "exists" = 1
       END
       PATCH_IF ("%exists%" = 0) BEGIN
-        PATCH_PRINT "%SOURCE_FILE% issue: Rest Spawn creature file does not exist (%resref%.cre)! Nulling..."
+        PATCH_PRINT "HI11: %SOURCE_FILE% - Rest Spawn creature file does not exist (%resref%.cre)! Nulling..."
         WRITE_ASCII ("%rest_off%" + 0x48 + ("%index%" * 0x08)) "NONE" #8
       END
     END
@@ -26,7 +26,7 @@ PATCH_IF (rest_off > 0x11b) BEGIN
   END
   READ_SHORT ("%rest_off%" + 0x98) "spawncount"
   PATCH_IF (("%none_count%" = 10) AND ("%spawncount%" != 0)) BEGIN
-    PATCH_PRINT "%SOURCE_FILE% issue: No creatures in Rest Spawn Entry but area still set to spawn something! Setting number of spawnable creatures to 0..."
+    PATCH_PRINT "HI12: %SOURCE_FILE% - No creatures in Rest Spawn Entry but area still set to spawn something! Setting number of spawnable creatures to 0..."
     WRITE_SHORT ("%rest_off%" + 0x98) 0
   END
 END
