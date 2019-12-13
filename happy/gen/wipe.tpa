@@ -28,46 +28,49 @@ ACTION_PHP_EACH filetype_size AS filetype => size BEGIN
   END
   ACTION_CLEAR_ARRAY delete_from_override //for subsequent filetypes
 
-  //second pass, check biffs
-  OUTER_SET j = 0
-  COPY_EXISTING_REGEXP GLOB ~^.+\.%filetype%$~ ~%MOD_FOLDER%/tmp~
-    delete = 0
-    PATCH_IF (SOURCE_SIZE <= size) OR (SOURCE_SIZE == 0) BEGIN
-      PATCH_IF (FILE_EXISTS_IN_GAME %SOURCE_FILE%) BEGIN
-        delete = 1
-        file = %SOURCE_FILE%
-        DEFINE_ASSOCIATIVE_ARRAY delete_from_key BEGIN %SOURCE_FILE% => %j% END
-        j+=1
+  ACTION_IF override_only != 1 BEGIN //check if we aren't in override only mode
+    //second pass, check biffs
+    OUTER_SET j = 0
+    COPY_EXISTING_REGEXP GLOB ~^.+\.%filetype%$~ ~%MOD_FOLDER%/tmp~
+      delete = 0
+      PATCH_IF (SOURCE_SIZE <= size) OR (SOURCE_SIZE == 0) BEGIN
+        PATCH_IF (FILE_EXISTS_IN_GAME %SOURCE_FILE%) BEGIN
+          delete = 1
+          file = %SOURCE_FILE%
+          DEFINE_ASSOCIATIVE_ARRAY delete_from_key BEGIN %SOURCE_FILE% => %j% END
+          j+=1
+        END
       END
+    BUT_ONLY
+    ACTION_PHP_EACH delete_from_key AS file => cnt BEGIN
+      DISABLE_FROM_KEY %SOURCE_FILE%
+      PRINT ~HE6: %SOURCE_FILE% invalid. Deregistered from chitin.key~
     END
-  BUT_ONLY
-  ACTION_PHP_EACH delete_from_key AS file => cnt BEGIN
-    DISABLE_FROM_KEY %SOURCE_FILE%
-    PRINT ~HE6: %SOURCE_FILE% invalid. Deregistered from chitin.key~
+    ACTION_CLEAR_ARRAY delete_from_key //for subsequent filetypes
   END
-  ACTION_CLEAR_ARRAY delete_from_key //for subsequent filetypes
 
 END
 
-
-//Ensure that all files are in consistent compile state
-COPY_EXISTING_REGEXP GLOB ~^.+\.dlg$~ ~override~
-  DECOMPILE_AND_PATCH BEGIN
-    x = 0
-  END
-BUT_ONLY
-COPY_EXISTING_REGEXP GLOB ~^.+\.dlg$~ ~override~
-  DECOMPILE_AND_PATCH BEGIN
-    x = 0
-  END
-BUT_ONLY
-COPY_EXISTING_REGEXP GLOB ~^.+\.bcs$~ ~override~
-  DECOMPILE_AND_PATCH BEGIN
-    x = 0
-  END
-BUT_ONLY
-COPY_EXISTING_REGEXP GLOB ~^.+\.bcs$~ ~override~
-  DECOMPILE_AND_PATCH BEGIN
-    x = 0
-  END
-BUT_ONLY
+ACTION_IF override_only != 1 BEGIN
+  //Ensure that all files are in consistent compile state
+  COPY_EXISTING_REGEXP GLOB ~^.+\.dlg$~ ~override~
+    DECOMPILE_AND_PATCH BEGIN
+      x = 0
+    END
+  BUT_ONLY
+  COPY_EXISTING_REGEXP GLOB ~^.+\.dlg$~ ~override~
+    DECOMPILE_AND_PATCH BEGIN
+      x = 0
+    END
+  BUT_ONLY
+  COPY_EXISTING_REGEXP GLOB ~^.+\.bcs$~ ~override~
+    DECOMPILE_AND_PATCH BEGIN
+      x = 0
+    END
+  BUT_ONLY
+  COPY_EXISTING_REGEXP GLOB ~^.+\.bcs$~ ~override~
+    DECOMPILE_AND_PATCH BEGIN
+      x = 0
+    END
+  BUT_ONLY
+END

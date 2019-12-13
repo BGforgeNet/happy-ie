@@ -1,9 +1,7 @@
 COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
-  PATCH_IF (SOURCE_SIZE > 0x71) BEGIN
-    PATCH_INCLUDE ~%comp_dir%/innate_to_level_1.tpp~
-    PATCH_INCLUDE ~%comp_dir%/slot_and_ability_target.tpp~
-    PATCH_INCLUDE ~%comp_dir%/fix_effect_target.tpp~
-  END
+  PATCH_INCLUDE ~%comp_dir%/innate_to_level_1.tpp~
+  PATCH_INCLUDE ~%comp_dir%/slot_and_ability_target.tpp~
+  PATCH_INCLUDE ~%comp_dir%/fix_effect_target.tpp~
 BUT_ONLY
 
 INCLUDE ~%comp_dir%/fix_bcs_innate.tpa~

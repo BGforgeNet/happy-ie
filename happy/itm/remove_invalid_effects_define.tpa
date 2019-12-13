@@ -1,0 +1,56 @@
+INCLUDE ~%MOD_FOLDER%/lib/functions.tpa~
+
+// Delete Magic fire/cold damage and protection
+ACTION_DEFINE_ASSOCIATIVE_ARRAY dtype BEGIN
+  33554432   =>  ~Magical Fire~
+  33554433   =>  ~Magical Fire Set to Value~
+  33554434   =>  ~Magical Fire Set to Percentage~
+  33554435   =>  ~Magical Fire (Max HP Percentage)~
+  67108864   =>  ~Magical Cold~
+  67108865   =>  ~Magical Cold Set to Value~
+  67108866   =>  ~Magical Cold Set to Value~
+  67108867   =>  ~Magical Cold (Max HP Percentage)~
+  134217728  =>  ~Stunning~
+  134217729  =>  ~Stunning Set to Value~
+  134217730  =>  ~Stunning Set to Percentage~
+  134217731  =>  ~Stunning (Max HP Percentage)~
+END
+
+ACTION_DEFINE_ASSOCIATIVE_ARRAY rtype BEGIN
+  84 => ~Magical Fire~
+  85 => ~Magical Cold~
+END
+
+ACTION_DEFINE_ASSOCIATIVE_ARRAY opcode_with_res BEGIN
+  67  => ~cre~
+  135 => ~cre~
+  151 => ~cre~
+  168 => ~cre~
+
+  111 => ~itm~
+  112 => ~itm~
+  122 => ~itm~
+  143 => ~itm~
+
+  146 => ~spl~
+  147 => ~spl~
+  148 => ~spl~
+  171 => ~spl~
+  172 => ~spl~
+  206 => ~spl~
+  207 => ~spl~
+  232 => ~spl~
+  266 => ~spl~
+
+  152 => ~mve~
+
+  174 => ~wav~
+
+  107 => ~bmp~
+
+  177 => ~eff~
+  248 => ~eff~
+  249 => ~eff~
+
+  186 => ~are~
+END

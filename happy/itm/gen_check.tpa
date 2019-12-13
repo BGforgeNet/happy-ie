@@ -1,47 +1,4 @@
-ACTION_DEFINE_ASSOCIATIVE_ARRAY opcode_with_res BEGIN
-  67  => ~cre~
-  135 => ~cre~
-  151 => ~cre~
-  168 => ~cre~
-
-  111 => ~itm~
-  112 => ~itm~
-  122 => ~itm~
-  143 => ~itm~
-
-  146 => ~spl~
-  147 => ~spl~
-  148 => ~spl~
-  171 => ~spl~
-  172 => ~spl~
-  206 => ~spl~
-  207 => ~spl~
-  232 => ~spl~
-  266 => ~spl~
-
-  152 => ~mve~
-
-  174 => ~wav~
-
-  107 => ~bmp~
-
-  177 => ~eff~
-  248 => ~eff~
-  249 => ~eff~
-
-  186 => ~are~
-END
-
+INCLUDE ~%comp_dir%/gen_check_define.tpa~
 COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
-  GET_OFFSET_ARRAY fx_array ITM_V10_GEN_EFFECTS
-  PHP_EACH fx_array AS int => fx_off BEGIN
-    READ_SHORT fx_off opcode
-    READ_ASCII (fx_off+0x14) resref
-    PATCH_IF VARIABLE_IS_SET $opcode_with_res(~%opcode%~) BEGIN
-      SPRINT ext $opcode_with_res(~%opcode%~)
-      PATCH_IF NOT FILE_EXISTS_IN_GAME ~%resref%.%ext%~ BEGIN
-        PATCH_PRINT ~HW231: %SOURCE_FILE% - effect with opcode %opcode% refers to a missing resource %resref%.%ext%~
-      END
-    END
-  END
+  PATCH_INCLUDE ~%comp_dir%/gen_check.tpp~
 BUT_ONLY

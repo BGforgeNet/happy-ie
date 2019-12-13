@@ -1,0 +1,9 @@
+PATCH_INCLUDE ~%comp_dir%/assign_script.tpp~
+PATCH_INCLUDE ~%comp_dir%/validate_container_content.tpp~
+PATCH_INCLUDE ~%comp_dir%/remove_missing_ambient.tpp~
+PATCH_INCLUDE ~%comp_dir%/remove_missing_actor.tpp~
+PATCH_INCLUDE ~%comp_dir%/patch_actor_misc.tpp~
+PATCH_INCLUDE ~%comp_dir%/remove_missing_spawn.tpp~
+PATCH_INCLUDE ~%comp_dir%/remove_missing_rest_spawn.tpp~
+PATCH_INCLUDE ~%comp_dir%/fix_mapnote_offset.tpp~
+PATCH_INCLUDE ~%comp_dir%/fix_container_traps_locks.tpp~

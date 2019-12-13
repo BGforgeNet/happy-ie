@@ -1,0 +1,23 @@
+ACTION_DEFINE_ASSOCIATIVE_ARRAY item_type BEGIN
+//  5  => ~arrow~
+//  14 => ~bullet~
+  15 => ~bow~
+  16 => ~dagger~
+  17 => ~mace~
+  18 => ~sling~
+  19 => ~small sword~
+  20 => ~big sword~
+  21 => ~hammer~
+  22 => ~morning star~
+  23 => ~flail~
+//  24 => ~dart~
+  25 => ~axe~
+  26 => ~staff~
+  27 => ~crossbow~
+  28 => ~hth~
+  29 => ~spear~
+  30 => ~polearm~
+//  31 => ~bolt~
+  57 => ~great sword~
+  69 => ~bastard sword~
+END

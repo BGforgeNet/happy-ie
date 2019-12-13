@@ -1,0 +1,9 @@
+// 1PPv4 causing crashes on NPCs with BG1 animations wearing helms with animset JC
+ACTION_IF (FILE_EXISTS_IN_GAME ~WPLJ8A1.bam~) AND NOT (FILE_EXISTS_IN_GAME ~WPLJCA1.bam~) BEGIN
+  PRINT "HW131: 1PP detected! Adding missing JC Helm animation set frames for BG1 animation compatibility..."
+  ACTION_FOR_EACH category IN ~L~ ~M~ ~S~ ~T~ BEGIN
+    ACTION_FOR_EACH sequence IN ~A1~ ~A1E~ ~A2~ ~A2E~ ~A3~ ~A3E~ ~A4~ ~A4E~ ~A5~ ~A5E~ ~A6~ ~A6E~ ~CA~ ~CAE~ ~G1~ ~G1E~ ~SA~ ~SAE~ ~SX~ ~SXE~ ~W2~ ~W2E~ BEGIN
+      COPY_EXISTING ~WP%category%J8%sequence%.BAM~ ~override/WP%category%JC%sequence%.BAM~
+    END
+  END
+END

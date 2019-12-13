@@ -1,7 +1,3 @@
-COPY_EXISTING_REGEXP GLOB ~^.+\.are$~ ~override~
-  PATCH_IF (SOURCE_SIZE > 0x11b) BEGIN
-
-
 // Container Content Validator
 READ_LONG  0x70 "cont_off" ELSE 0
 READ_SHORT 0x74 "cont_num" ELSE 0
@@ -49,7 +45,3 @@ PATCH_IF (cont_off > 0x11b) BEGIN
 
   END
 END
-
-
-  END
-BUT_ONLY
