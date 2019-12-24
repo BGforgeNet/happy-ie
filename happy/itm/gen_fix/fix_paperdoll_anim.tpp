@@ -5,5 +5,5 @@ READ_ASCII 0x22 anim (2)
 READ_BYTE 0x31 prof
 PATCH_IF type = 0 AND NOT (~%anim%~ STRING_EQUAL ~  ~) BEGIN
   PATCH_PRINT ~HW127: %SOURCE_FILE% - wrong paperdoll animation %anim% for item type MISC. Setting to NONE.~
-  WRITE_ASCII 0x22 ~~ #2
+  WRITE_ASCII 0x22 ~  ~ #2
 END
