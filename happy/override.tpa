@@ -57,6 +57,7 @@ END
 OUTER_TEXT_SPRINT comp_dir ~%MOD_FOLDER%/itm~
 INCLUDE ~%comp_dir%/fix_enchantment_define.tpa~
 INCLUDE ~%comp_dir%/gen_check_define.tpa~
+INCLUDE ~%comp_dir%/remove_invalid_effects_define.tpa~
 ACTION_BASH_FOR ~override~ ~.+\.itm$~ BEGIN
   COPY ~%BASH_FOR_FILESPEC%~ ~override~
     PATCH_INCLUDE ~%comp_dir%/add_missing_immunity.tpp~
@@ -64,8 +65,10 @@ ACTION_BASH_FOR ~override~ ~.+\.itm$~ BEGIN
     PATCH_INCLUDE ~%comp_dir%/fix_enchantment.tpp~
     PATCH_INCLUDE ~%comp_dir%/gen_check.tpp~
     PATCH_INCLUDE ~%comp_dir%/remove_dup_effect.tpp~
+    PATCH_INCLUDE ~%comp_dir%/remove_invalid_effects_define.tpp~
   BUT_ONLY
 END
+
 
 //spl
 OUTER_TEXT_SPRINT comp_dir ~%MOD_FOLDER%/spl~
