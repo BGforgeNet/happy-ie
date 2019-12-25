@@ -61,7 +61,7 @@ INCLUDE ~%comp_dir%/remove_invalid_effects_define.tpa~
 ACTION_BASH_FOR ~override~ ~.+\.itm$~ BEGIN
   COPY ~%BASH_FOR_FILESPEC%~ ~override~
     PATCH_INCLUDE ~%comp_dir%/add_missing_immunity.tpp~
-    PATCH_INCLUDE ~%comp_dir%/add_portrait_icon.tpp~
+    PATCH_INCLUDE ~%comp_dir%/assign_portrait_icon.tpp~
     PATCH_INCLUDE ~%comp_dir%/fix_enchantment.tpp~
     PATCH_INCLUDE ~%comp_dir%/gen_check.tpp~
     PATCH_INCLUDE ~%comp_dir%/remove_dup_effect.tpp~
