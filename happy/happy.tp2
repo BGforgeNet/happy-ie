@@ -82,32 +82,39 @@ INCLUDE ~%comp_dir%/main.tpa~
 
 BEGIN ~Items: add missing portrait icons~
 FORBID_COMPONENT "happy.tp2" "0" "Override only mode."
-INCLUDE ~%MOD_FOLDER%/itm/assign_portrait_icon.tpa~
+OUTER_SPRINT comp_dir ~%MOD_FOLDER%/itm~
+INCLUDE ~%comp_dir%/assign_portrait_icon.tpa~
 
 BEGIN ~Items: add missing immunities~
 FORBID_COMPONENT "happy.tp2" "0" "Override only mode."
-INCLUDE ~%MOD_FOLDER%/itm/add_missing_immunity.tpa~
+OUTER_SPRINT comp_dir ~%MOD_FOLDER%/itm~
+INCLUDE ~%comp_dir%/add_missing_immunity.tpa~
 
 BEGIN ~Items: remove duplicate effects~
 FORBID_COMPONENT "happy.tp2" "0" "Override only mode."
-INCLUDE ~%MOD_FOLDER%/itm/remove_dup_effect.tpa~
+OUTER_SPRINT comp_dir ~%MOD_FOLDER%/itm~
+INCLUDE ~%comp_dir%/remove_dup_effect.tpa~
 
 BEGIN ~Items: remove invalid effects~
 FORBID_COMPONENT "happy.tp2" "0" "Override only mode."
-INCLUDE ~%MOD_FOLDER%/itm/remove_invalid_effects.tpa~
+OUTER_SPRINT comp_dir ~%MOD_FOLDER%/itm~
+INCLUDE ~%comp_dir%/remove_invalid_effects.tpa~
 
 BEGIN ~Items: fix enchantment level~
 FORBID_COMPONENT "happy.tp2" "0" "Override only mode."
-INCLUDE ~%MOD_FOLDER%/itm/fix_enchantment.tpa~
+OUTER_SPRINT comp_dir ~%MOD_FOLDER%/itm~
+INCLUDE ~%comp_dir%/fix_enchantment.tpa~
 
 BEGIN ~Items: misc checks~
 FORBID_COMPONENT "happy.tp2" "0" "Override only mode."
-INCLUDE ~%MOD_FOLDER%/itm/gen_check.tpa~
+OUTER_SPRINT comp_dir ~%MOD_FOLDER%/itm~
+INCLUDE ~%comp_dir%/gen_check.tpa~
 
 
 BEGIN ~Spells: structure~
 FORBID_COMPONENT "happy.tp2" "0" "Override only mode."
-INCLUDE ~%MOD_FOLDER%/spl/structure.tpa~
+OUTER_SPRINT comp_dir ~%MOD_FOLDER%/spl~
+INCLUDE ~%comp_dir%/structure.tpa~
 
 BEGIN ~Spells: misc~
 FORBID_COMPONENT "happy.tp2" "0" "Override only mode."
