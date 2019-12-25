@@ -42,22 +42,22 @@ INCLUDE ~%comp_dir%/main.tpa~
 BEGIN ~Creatures: structure~
 FORBID_COMPONENT "happy.tp2" "0" "Override only mode."
 OUTER_TEXT_SPRINT comp_dir ~%MOD_FOLDER%/cre~
-INCLUDE ~%MOD_FOLDER%/cre/init_fix.tpa~
+INCLUDE ~%comp_dir%/init_fix.tpa~
 
 BEGIN ~Creatures: remove spurious references to the item table~
 FORBID_COMPONENT "happy.tp2" "0" "Override only mode."
 OUTER_TEXT_SPRINT comp_dir ~%MOD_FOLDER%/cre~
-INCLUDE ~%MOD_FOLDER%/cre/inv_unbork.tpa~
+INCLUDE ~%comp_dir%/inv_unbork.tpa~
 
 BEGIN ~Creatures: replace non-existent items with existent ones where possible, otherwise remove them~
 FORBID_COMPONENT "happy.tp2" "0" "Override only mode."
 OUTER_TEXT_SPRINT comp_dir ~%MOD_FOLDER%/cre~
-INCLUDE ~%MOD_FOLDER%/cre/inv_clean.tpa~
+INCLUDE ~%comp_dir%/inv_clean.tpa~
 
 BEGIN ~Creatures: equip valid items and unequip invalid ones~
 FORBID_COMPONENT "happy.tp2" "0" "Override only mode."
 OUTER_TEXT_SPRINT comp_dir ~%MOD_FOLDER%/cre~
-INCLUDE ~%MOD_FOLDER%/cre/inv_overhaul.tpa~
+INCLUDE ~%comp_dir%/inv_overhaul.tpa~
 
 BEGIN ~Creatures: misc~
 FORBID_COMPONENT "happy.tp2" "0" "Override only mode."
@@ -66,7 +66,8 @@ INCLUDE ~%comp_dir%/main.tpa~
 
 BEGIN ~Creatures: remove duplicate effects~
 FORBID_COMPONENT "happy.tp2" "0" "Override only mode."
-INCLUDE ~%MOD_FOLDER%/cre/remove_dup_effect.tpa~
+OUTER_SPRINT comp_dir ~%MOD_FOLDER%/cre~
+INCLUDE ~%comp_dir%/remove_dup_effect.tpa~
 
 
 BEGIN ~Items: structure~
