@@ -1,5 +1,5 @@
 INCLUDE ~%comp_dir%/remove_invalid_effects_define.tpa~
 
 COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
-  PATCH_INCLUDE ~%comp_dir%/remove_invalid_effects_define.tpp~
+  PATCH_INCLUDE ~%comp_dir%/remove_invalid_effects.tpp~
 BUT_ONLY
