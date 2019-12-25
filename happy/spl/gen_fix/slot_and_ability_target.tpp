@@ -1,3 +1,6 @@
+READ_SHORT 0x1c "spell_type" //these doubled to be used without innate to level 1
+READ_LONG  0x34 "spell_level"
+
 READ_LONG  0x64 "abil_off" ELSE 0
 READ_SHORT 0x68 "abil_num" ELSE 0
 PATCH_IF (abil_off > 0x71) BEGIN
