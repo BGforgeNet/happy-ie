@@ -51,7 +51,7 @@ ACTION_PHP_EACH filetype_size AS filetype => size BEGIN
 
 END
 
-ACTION_IF GAME_IS ~tob~ BEGIN
+ACTION_IF GAME_IS ~tob~ AND NOT override_only BEGIN
   COMPILE ~%MOD_FOLDER%/gen/empty_dlg.d~
 END
 
