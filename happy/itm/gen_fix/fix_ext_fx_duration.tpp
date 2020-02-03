@@ -12,7 +12,7 @@ PHP_EACH h_array AS i1 => h_off BEGIN
       WRITE_LONG (fx_off + 0xe) 0
     END
     PATCH_IF (timing = 0) AND duration = 0 BEGIN
-      PATCH_PRINT ~HI40: %SOURCE_FILE% - effect %i1%/%i2% has no duration set. Setting to timing to 1/instant.~
+      PATCH_PRINT ~HI40: %SOURCE_FILE% - effect %i1%/%i2% has no duration set. Setting timing to 1/instant.~
       WRITE_BYTE (fx_off + 0xc) 1
     END
   END
