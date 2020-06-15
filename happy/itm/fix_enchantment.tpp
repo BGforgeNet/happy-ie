@@ -8,6 +8,10 @@ PATCH_IF (enchantment != 0 AND magic_flag = 0) AND VARIABLE_IS_SET $item_type(~%
   new_flags = flags BOR 0b01000000
   WRITE_BYTE 0x18 new_flags
 END
-PATCH_IF (enchantment = 0 AND magic_flag != 0) AND VARIABLE_IS_SET $item_type(~%type%~) BEGIN
+PATCH_IF enchantment = 0
+  AND magic_flag != 0
+  AND VARIABLE_IS_SET $item_type(~%type%~)
+  AND NOT (SOURCE_RES STR_EQ ~aegis~ OR SOURCE_RES STR_EQ ~aegis2~) // skip aegis for now, see https://github.com/Gibberlings3/BG2-Fixpack/pull/7
+BEGIN
   PATCH_PRINT ~HI61: %SOURCE_FILE% - magic flag %magic_flag% and enchantment level %enchantment% are inconsistent.~
 END
