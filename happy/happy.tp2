@@ -2,6 +2,10 @@ BACKUP ~happy/backup~
 AUTHOR ~burner1024 @ github~
 VERSION ~v1~
 
+ALWAYS
+  OUTER_SPRINT BGFORGE_LIB_DIR "%MOD_FOLDER%/lib/bgforge"
+  INCLUDE ~%BGFORGE_LIB_DIR%/main.tpa~
+END
 
 BEGIN ~Override only~
 INCLUDE ~%MOD_FOLDER%/are/disable_key.tpa~
