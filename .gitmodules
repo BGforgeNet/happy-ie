@@ -1,0 +1,4 @@
+[submodule "happy/lib/bgforge"]
+	path = happy/lib/bgforge
+	url = https://github.com/BGforgeNet/BGforge-MLS-IElib.git
+	branch = master
