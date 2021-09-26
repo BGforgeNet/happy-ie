@@ -4,6 +4,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
   END
   PATCH_INCLUDE ~%comp_dir%/slot_and_ability_target.tpp~
   PATCH_INCLUDE ~%comp_dir%/fix_effect_target.tpp~
+  PATCH_INCLUDE ~%comp_dir%/is_secondary_spell_instant.tpp~
 BUT_ONLY
 
 ACTION_IF NOT ENGINE_IS ~bgee bg2ee eet iwdee pstee~ BEGIN

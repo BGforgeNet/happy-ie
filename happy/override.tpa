@@ -85,6 +85,7 @@ ACTION_BASH_FOR ~override~ ~.+\.spl$~ BEGIN
     END
     PATCH_INCLUDE ~%comp_dir%/slot_and_ability_target.tpp~
     PATCH_INCLUDE ~%comp_dir%/fix_effect_target.tpp~
+    PATCH_INCLUDE ~%comp_dir%/is_secondary_spell_instant.tpp~
   BUT_ONLY
 END
 
