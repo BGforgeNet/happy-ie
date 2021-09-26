@@ -10,7 +10,8 @@ PHP_EACH ab_array AS int => ab_off BEGIN
       READ_LONG (fx_off + FX_parameter2) casting_type
       READ_ASCII (fx_off + FX_resource) spell
       PATCH_IF casting_type != CASTING_TYPE_instant BEGIN
-        PATCH_PRINT ~HW245: %SOURCE_FILE% - opcode %opcode%, non-instant casting type %casting_type% for secondary spell %spell%. This is likely a mistake, secondary spell can be interrupted after main spell is cast~
+        PATCH_PRINT ~HW245: %SOURCE_FILE% - opcode %opcode%, non-instant casting type %casting_type% for secondary spell %spell%. This is likely a mistake, secondary spell can be interrupted after main spell is cast. Changing effect #%i% to instant cast.~
+        WRITE_LONG (fx_off + FX_parameter2) CASTING_TYPE_instant
       END
     END DEFAULT END
   END
