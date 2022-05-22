@@ -1,0 +1,25 @@
+/*
+2DA for suppressing Happy checks for specific files
+Format is "filename error_code":
+plgran01.cre hw34
+balthas.cre hi12
+...
+
+*/
+
+ACTION_IF FILE_EXISTS_IN_GAME ~happy_ignore.2da~ BEGIN
+    COPY_EXISTING ~happy_ignore.2da~ ~override~
+        COUNT_2DA_COLS num_cols
+        READ_2DA_ENTRIES_NOW ignore_list 2
+        FOR (row = 0; row < num_rows; ++row) BEGIN
+            READ_2DA_ENTRY_FORMER ignore_list row 0 filename
+            READ_2DA_ENTRY_FORMER ignore_list row 1 errorcode
+            SET $happyignore("%filename%" "%errorcode%") 1
+        END
+    BUT_ONLY
+END
+
+/*
+Check with
+NOT VARIABLE_IS_SET happyignore(~%SOURCE_FILE%~ ~%error_code%~)
+*/
