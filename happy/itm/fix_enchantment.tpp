@@ -14,7 +14,7 @@ PATCH_IF enchantment = 0
   AND magic_flag != 0
   AND VARIABLE_IS_SET $item_type(~%type%~)
   AND NOT (GAME_IS "bg2ee eet" AND (~%SOURCE_FILE%~ STR_EQ ~ax1h07.itm~))  // bala's axe
-  AND NOT (GAME_IS "bgee eet sod" AND (~%SOURCE_FILE%~ STR_EQ ~staf25.itm~))  // ossifier
+  AND NOT ((GAME_IS "bgee eet" OR GAME_INCLUDES ~sod~) AND (~%SOURCE_FILE%~ STR_EQ ~staf25.itm~))  // ossifier
 BEGIN
   PATCH_PRINT ~HI61: %SOURCE_FILE% - magical flag bit 6 and enchantment level %enchantment% are inconsistent.~
 END
